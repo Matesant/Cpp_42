@@ -17,6 +17,7 @@ void PhoneBook::addContact(void)
 	std::string name;
 	if (this->_size == 8)
 	{
+		std::cout << BRIGHT_MAGENTA << "PhoneBook is full. The oldest Contact will be deleted." << std::endl;
 		for (int i = 0; i < 7; i++)
 		{
 			this->_contacts[i] = this->_contacts[i + 1];
@@ -26,30 +27,27 @@ void PhoneBook::addContact(void)
 	}
 	this->_index++;
 	this->_size++;
-	std::cout << BRIGHT_GREEN << "Enter the first name: " << RESET;
+	std::cout << BRIGHT_GREEN << "Please insert the contact first name: " << RESET;
 	std::cin.ignore(10000, '\n');
 	std::getline(std::cin, name);
-	//validateName(name);
 	this->_contacts[this->_index].setFirstName(name);
-	std::cout << BRIGHT_GREEN << "Enter the last name: " << RESET;
+	std::cout << BRIGHT_GREEN << "Please insert the contact last name: " << RESET;
 	std::getline(std::cin, name);
-	//validateName(name);
 	this->_contacts[this->_index].setLastName(name);
-	std::cout << BRIGHT_GREEN << "Enter the nickname: " << RESET;
+	std::cout << BRIGHT_GREEN <<  "Please insert the contact nickname: " << RESET;
 	std::getline(std::cin, name);
 	this->_contacts[this->_index].setNickname(name);
-	std::cout << BRIGHT_GREEN << "Enter darkest secret: " << RESET;
+	std::cout << BRIGHT_GREEN << "Please insert the contact darkest secret: " << RESET;
 	std::getline(std::cin, name);
 	this->_contacts[this->_index].setDarkestSecret(name);
-	std::cout << BRIGHT_GREEN << "Enter the phone number: " << RESET;
+	std::cout << BRIGHT_GREEN << "Please insert the contact phone number: " << RESET;
 	std::getline(std::cin, name);
-	//validatePhoneNumber(name);
 	this->_contacts[this->_index].setPhoneNumber(name);
 }
 
 std::string formatString(const std::string& str) {
     if (str.length() > 10) {
-        return str.substr(0, 9) + ".";
+        return str.substr(0, 8) + ".";
     }
     return str;
 }
@@ -70,7 +68,7 @@ void PhoneBook::searchContact(void)
 	i = 0;
 	if (this->_size == 0)
 	{
-		std::cout << "No contacts available" << std::endl;
+		std::cout << BRIGHT_RED << "No contacts available" << std::endl;
 		return ;
 	}
 	std::cout << "    index | first name | last name  | nickname" << std::endl;
