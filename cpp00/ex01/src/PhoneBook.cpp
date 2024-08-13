@@ -15,16 +15,25 @@ PhoneBook::~PhoneBook(void)
 void PhoneBook::addContact(void)
 {
 	std::string name;
+	if (this->_size == 8)
+	{
+		for (int i = 0; i < 7; i++)
+		{
+			this->_contacts[i] = this->_contacts[i + 1];
+		}
+		this->_index--;
+		this->_size--;
+	}
 	this->_index++;
 	this->_size++;
 	std::cout << BRIGHT_GREEN << "Enter the first name: " << RESET;
 	std::cin.ignore(10000, '\n');
 	std::getline(std::cin, name);
-	validateName(name);
+	//validateName(name);
 	this->_contacts[this->_index].setFirstName(name);
 	std::cout << BRIGHT_GREEN << "Enter the last name: " << RESET;
 	std::getline(std::cin, name);
-	validateName(name);
+	//validateName(name);
 	this->_contacts[this->_index].setLastName(name);
 	std::cout << BRIGHT_GREEN << "Enter the nickname: " << RESET;
 	std::getline(std::cin, name);
@@ -34,7 +43,7 @@ void PhoneBook::addContact(void)
 	this->_contacts[this->_index].setDarkestSecret(name);
 	std::cout << BRIGHT_GREEN << "Enter the phone number: " << RESET;
 	std::getline(std::cin, name);
-	validatePhoneNumber(name);
+	//validatePhoneNumber(name);
 	this->_contacts[this->_index].setPhoneNumber(name);
 }
 
@@ -64,13 +73,13 @@ void PhoneBook::searchContact(void)
 		std::cout << "No contacts available" << std::endl;
 		return ;
 	}
-	std::cout << "index | first name | last name  | nickname" << std::endl;
+	std::cout << "    index | first name | last name  | nickname" << std::endl;
 	while (i < this->_size)
 	{
-		std::cout << std::setw(5) << std::right << i+ 1 
-			 << " | " << std::setw(10) << std::right << formatString(this->_contacts[i].getFirstName())
-			 << " | " << std::setw(10) << std::right << formatString(this->_contacts[i].getLastName())
-			 << " | " << std::setw(10) << std::right << formatString(this->_contacts[i].getNickname()) 
+		std::cout << std::setw(9) << std::right << i+ 1 
+			 << " | " << std::setw(9) << std::right << formatString(this->_contacts[i].getFirstName())
+			 << "  | " << std::setw(9) << std::right << formatString(this->_contacts[i].getLastName())
+			 << "  | " << std::setw(9) << std::right << formatString(this->_contacts[i].getNickname()) 
 			 << std::endl;
 		i++;
 	}
