@@ -1,2 +1,105 @@
+# Prerequisites
+*.d
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Linker output
+*.ilk
+*.map
+*.exp
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Kernel Module Compile Results
+*.mod*
+*.cmd
+.tmp_versions/
+modules.order
+Module.symvers
+Mkfile.old
+dkms.conf
+
+# Local files
+.vscode/
+*/.vscode/
+.dist/
+*/.dist/
+*/*/build/
+
+# Executables
+*/*/megaphone
+*/*/phonebook
+*/*/account
+*/*/zombie
+*/*/zombie_horde
+*/*/brain
+*/*/unnecessary_violence
+*/*/sed_is_for_losers
+*/*/harl_2.0
+*/*/harlFilter
+*/*/fixed
+*/*/fixed_point
+*/*/ultimate_fixed
+*/*/BSP
+*/*/ClapTrap
+*/*/ScavTrap
+*/*/FragTrap
+*/*/DiamondTrap
+*/*/Animal
+*/*/Brain
+*/*/AbstractAnimal
+*/*/Interface
+*/*/Bureaucrat
+*/*/Form
+*/*/AForm
+*/*/Intern
+*/*/ScalarConverter
+*/*/Serializer
+*/*/Base
+*/*/Template
+*/*/TemplateEval
+*/*/Iter
+*/*/IterEval
+*/*/Array
+*/*/EasyFind
+*/*/Span
+*/*/MutantStack
+*/*/btc
+*/*/RPN
+*/*/PmergeMe
 42_CPP
 bin
+vscode
+.vscode
