@@ -11,8 +11,11 @@ class PhoneBook
 	int _size;
 
   public:
+	// constructor
 	PhoneBook(void);
+	// destructor
 	~PhoneBook(void);
+	// methods
 	void addContact(void);
 	void searchContact(void);
 };
