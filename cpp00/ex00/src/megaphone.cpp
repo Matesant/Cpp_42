@@ -1,11 +1,11 @@
 #include <iostream>
 #include <string>
 
-bool check_argc(int argc)
+bool checkArgc(int argc)
 {
 	if (argc == 1)
 	{
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
+		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
 		return (false);
 	}
 	return (true);
@@ -13,12 +13,12 @@ bool check_argc(int argc)
 
 int main(int argc, char **argv)
 {
-	if (check_argc(argc))
+	if (checkArgc(argc))
 		for (int i = 1; i < argc; i++)
 		{
-			std::string argv_type_str = argv[i];
-			for (size_t character = 0; character < argv_type_str.length(); character++)
-				std::cout << (char)std::toupper(argv_type_str[character]);
+			std::string argvTypeStr = argv[i];
+			for (size_t character = 0; character < argvTypeStr.length(); character++)
+				std::cout << (char)std::toupper(argvTypeStr[character]);
 			std::cout << ' ';
 		}
 	std::cout << std::endl;
