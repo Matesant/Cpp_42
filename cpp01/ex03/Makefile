@@ -17,8 +17,8 @@ CFLAGS	=	-Wall -Werror -Wextra -std=c++98 -I.
 RM		=	rm -rf
 
 # Dir and file names
-NAME	=	Brains
-SRCS	=	./src/main.cpp
+NAME	=	Violence
+SRCS	=	./src/main.cpp ./src/HumanB.cpp ./src/HumanA.cpp ./Weapon.cpp
 BIN_DIR =	./bin
 OBJS	=	$(addprefix $(BIN_DIR)/, $(notdir $(SRCS:.cpp=.o)))
 INC		=	$(wildcard /includes/*.hpp)
