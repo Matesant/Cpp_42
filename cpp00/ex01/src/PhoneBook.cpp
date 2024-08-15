@@ -71,13 +71,16 @@ void PhoneBook::searchContact(void)
 		std::cout << BRIGHT_RED << "No contacts available" << std::endl;
 		return ;
 	}
-	std::cout << "    index | first name | last name  | nickname" << std::endl;
+	std::cout << std::setw(10) << "index" << "|";
+	std::cout << std::setw(10) << "First Name" << "|";
+	std::cout << std::setw(10) << "Last Name" << "|";
+	std::cout << std::setw(10) << "Nickname" << "|" << std::endl;
 	while (i < this->_size)
 	{
-		std::cout << std::setw(9) << std::right << i+ 1 
-			 << " | " << std::setw(9) << std::right << formatString(this->_contacts[i].getFirstName())
-			 << "  | " << std::setw(9) << std::right << formatString(this->_contacts[i].getLastName())
-			 << "  | " << std::setw(9) << std::right << formatString(this->_contacts[i].getNickname()) 
+		std::cout << std::setw(10) << std::right << i+ 1 
+			 << "|" << std::setw(10) << std::right << formatString(this->_contacts[i].getFirstName())
+			 << "|" << std::setw(10) << std::right << formatString(this->_contacts[i].getLastName())
+			 << "|" << std::setw(10) << std::right << formatString(this->_contacts[i].getNickname()) 
 			 << std::endl;
 		i++;
 	}
