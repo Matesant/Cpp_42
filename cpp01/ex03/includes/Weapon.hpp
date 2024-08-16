@@ -10,6 +10,7 @@ const std::string CYAN = "\033[36m";
 const std::string BOLD = "\033[1m";
 const std::string BLINK = "\033[5m";
 const std::string RESET = "\033[0m";
+const std::string INVERSE = "\033[7m";
 
 // Class declaration
 class Weapon

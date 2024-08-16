@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 15:51:20 by matesant          #+#    #+#             */
-/*   Updated: 2024/08/15 19:33:26 by matesant         ###   ########.fr       */
+/*   Updated: 2024/08/16 18:55:16 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,15 @@ int	main(int argc, char **argv)
 		return (1);
 	
 	Replace newSed = Replace(argv[1], argv[2], argv[3]);	
-	newSed.formatExtension();
 	std::cout << BOLD << BRIGHT_GREEN << "File: " << RESET << newSed.getFilename() << std::endl;
-	std::cout << BOLD << BRIGHT_GREEN << "Replacing " << newSed.getNeedle() << " with " << newSed.getHaystack() << " in " << newSed.getFilename() << std::endl;
+	std::cout << BOLD << BRIGHT_GREEN << "Replacing " << newSed.getHaystack() << " with " << newSed.getNeedle() << " in " << newSed.getFilename() << std::endl;
 	std::ifstream file(newSed.getFilename().c_str());
 	if (!file.is_open())
 	{
 		std::cout << BOLD << BRIGHT_RED << "Error: " << RESET << "Could not open file." << std::endl;
 		return (1);
 	}
+	newSed.formatExtension();
 	if (mySed(file, newSed.getNeedle(), newSed.getHaystack(), newSed))
 		return (1);
 	file.close();
