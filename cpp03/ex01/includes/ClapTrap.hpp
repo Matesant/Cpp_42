@@ -20,7 +20,7 @@ class ClapTrap {
  public:
   ClapTrap();
   ClapTrap(std::string name);
-  ClapTrap(const ClapTrap &other);
+  ClapTrap(const ClapTrap &copy);
   ~ClapTrap();
 
   ClapTrap &operator=(const ClapTrap &rigthSide);
@@ -33,7 +33,7 @@ class ClapTrap {
   std::string getName(void) const;
   int getAttackDamage(void) const;
 
- private:
+  protected:
 	std::string _name;
 	int _hitPoints;
 	int _energyPoints;

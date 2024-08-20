@@ -30,6 +30,7 @@ class Fixed
 	Fixed(const float value);
 	~Fixed(void);
 
+	Fixed &operator=(Fixed const &rigthSide);
 	int getRawBits(void) const;
 	void setRawBits(int const raw);
 	float toFloat(void) const;
@@ -50,7 +51,6 @@ class Fixed
 	bool operator!=(Fixed const &rigthSide) const;
 
 	// Arithmetic operators
-	Fixed &operator=(Fixed const &rigthSide);
 	Fixed operator+(Fixed const &rigthSide) const;
 	Fixed operator-(Fixed const &rigthSide) const;
 	Fixed operator*(Fixed const &rigthSide) const;

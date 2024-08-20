@@ -17,8 +17,8 @@ CFLAGS	=	-Wall -Werror -Wextra -std=c++98 -I.
 RM		=	rm -rf
 
 # Dir and file names
-NAME	=	ScavTrap
-SRCS	=	./src/main.cpp ./src/ClapTrap.cpp ./src/ScavTrap.cpp
+NAME	=	FragTrap
+SRCS	=	./src/main.cpp ./src/ClapTrap.cpp ./src/ScavTrap.cpp ./src/FragTrap.cpp
 BIN_DIR =	./bin
 OBJS	=	$(addprefix $(BIN_DIR)/, $(notdir $(SRCS:.cpp=.o)))
 INC		=	$(wildcard /includes/*.hpp)

@@ -28,9 +28,9 @@ class Fixed
 	Fixed(Fixed const &src);
 	Fixed(const int value);
 	Fixed(const float value);
-	Fixed &operator=(Fixed const &rigthSide);
 	~Fixed(void);
 
+	Fixed &operator=(Fixed const &rigthSide);
 	int getRawBits(void) const;
 	void setRawBits(int const raw);
 	float toFloat(void) const;

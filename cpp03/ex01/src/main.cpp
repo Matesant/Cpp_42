@@ -1,27 +1,47 @@
-#include "./includes/Fixed.hpp"
+#include "./includes/ScavTrap.hpp"
 
 int	main(void)
 {
-	std::cout << BOLD << INVERSE << "INSTANTIATING OBJECTS AND CALLING THEIR DEFAULT CONSTRUCTORS" << RESET << std::endl;
-	Fixed	a;
-	Fixed	c;
+	std::cout << INVERSE << "CREATING SCAVTRAP" << RESET << std::endl;
+	ScavTrap ScavTrap1("CARAMEL");
+	ScavTrap ScavTrap2("jorge");
 
-	std::cout << BOLD << INVERSE << "INSTANTIATING OBJECTS AND CALLING THEIR COPY CONSTRUCTORS" << RESET << std::endl;
-	Fixed b(a);
-	c = b;
+	std::cout << "ATTACKING SCAVTRAP" << std::endl;
+	ScavTrap1.attack(ScavTrap2.getName());
+	ScavTrap2.takeDamage(ScavTrap1.getAttackDamage());
+	ScavTrap2.beRepaired(5);
+	ScavTrap2.attack(ScavTrap1.getName());
+	ScavTrap1.takeDamage(ScavTrap2.getAttackDamage());
+	ScavTrap1.beRepaired(5);
+	ScavTrap1.attack(ScavTrap2.getName());
+	ScavTrap2.takeDamage(ScavTrap1.getAttackDamage());
+	ScavTrap2.beRepaired(5);
+	ScavTrap2.attack(ScavTrap1.getName());
+	ScavTrap1.takeDamage(ScavTrap2.getAttackDamage());
+	ScavTrap1.beRepaired(5);
+	ScavTrap1.attack(ScavTrap2.getName());
+	ScavTrap2.takeDamage(ScavTrap1.getAttackDamage());
+	ScavTrap2.beRepaired(5);
+	ScavTrap2.attack(ScavTrap1.getName());
+	ScavTrap1.takeDamage(ScavTrap2.getAttackDamage());
+	ScavTrap1.beRepaired(5);
+	ScavTrap1.attack(ScavTrap2.getName());
+	ScavTrap2.takeDamage(ScavTrap1.getAttackDamage());
+	ScavTrap2.beRepaired(5);
+	ScavTrap2.attack(ScavTrap1.getName());
+	ScavTrap1.takeDamage(ScavTrap2.getAttackDamage());
+	ScavTrap1.beRepaired(5);
+	ScavTrap1.attack(ScavTrap2.getName());
+	ScavTrap2.takeDamage(ScavTrap1.getAttackDamage());
+	ScavTrap2.beRepaired(5);
+	ScavTrap2.attack(ScavTrap1.getName());
+	ScavTrap1.takeDamage(ScavTrap2.getAttackDamage());
+	ScavTrap1.beRepaired(5);
+	ScavTrap1.attack(ScavTrap2.getName());
+	ScavTrap2.takeDamage(ScavTrap1.getAttackDamage());
+	ScavTrap1.attack(ScavTrap2.getName());
+	ScavTrap2.takeDamage(ScavTrap1.getAttackDamage());
+	ScavTrap1.guardGate();
 
-	std::cout << BOLD << INVERSE << "GETTING RAW BITS" << RESET << std::endl;
-	std::cout << a.getRawBits() << std::endl;
-	std::cout << b.getRawBits() << std::endl;
-	std::cout << c.getRawBits() << std::endl;
-
-	std::cout << BOLD << INVERSE << "SETTING RAW BITS" << RESET << std::endl;
-	b.setRawBits(42);
-	a.setRawBits(21);
-	c.setRawBits(0.0);
-	std::cout << a.getRawBits() << std::endl;
-	std::cout << b.getRawBits() << std::endl;
-	std::cout << c.getRawBits() << std::endl;
-	std::cout << BOLD << INVERSE << "DESTRUCTORS" << RESET << std::endl;
 	return (0);
 }
