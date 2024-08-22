@@ -3,8 +3,7 @@
 # define DOG_HPP_
 
 # include "./Animal.hpp"
-# include <iostream>
-# include <string>
+# include "./Brain.hpp"
 
 // Class declaration
 class Dog : public Animal
@@ -20,6 +19,11 @@ class Dog : public Animal
 	// member functions
 	virtual void makeSound(void) const;
 	std::string getType(void) const;
+	std::string getIdea(int index) const;
+	void setIdea(int index, std::string idea);
+
+  private:
+	Brain *_brain;
 };
 
 #endif

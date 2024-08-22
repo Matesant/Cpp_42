@@ -1,34 +1,53 @@
 #include "./includes/Dog.hpp"
 
-Dog::Dog() : Animal("Dog")
+Dog::Dog() : Animal("Dog"), _brain(new Brain())
 {
-	std::cout << CYAN << BOLD << "Creating a Dog!" << RESET << std::endl;
+	std::cout << CYAN << "Creating a Dog!" << RESET << std::endl;
 }
 
 Dog::~Dog()
 {
-	std::cout << RED << BOLD << "Dog Destructor called" << RESET << std::endl;
+	std::cout << RED << "Dog Destructor called" << RESET << std::endl;
+	delete this->_brain;
+	this->_brain = NULL;
 }
 
-Dog::Dog(const Dog &copy) : Animal(copy)
+Dog::Dog(const Dog &copy) : Animal(copy), _brain(new Brain(*copy._brain))
 {
 	std::cout << BOLD << "Dog Copy constructor called" << RESET << std::endl;
-	*this = copy;
 }
 
-Dog &Dog::operator=(Dog const &rightSide)
+Dog &Dog::operator=(const Dog &rightSide)
 {
+	Brain	*newBrain;
+
 	std::cout << BOLD << "Dog Assignation operator called" << RESET << std::endl;
-	this->_type = rightSide._type;
+	if (this != &rightSide)
+	{
+		Animal::operator=(rightSide);
+		newBrain = new Brain(*rightSide._brain);
+		delete this->_brain;
+		this->_brain = newBrain;
+	}
 	return (*this);
 }
 
-std::string Dog::getType(void) const
+std::string Dog::getType() const
 {
 	return (this->_type);
 }
 
-void Dog::makeSound(void) const
+std::string Dog::getIdea(int index) const
 {
-	std::cout << GREEN << BOLD << "WOOF WOOF!" << RESET << std::endl;
+	return (this->_brain->getIdea(index));
+}
+
+void Dog::setIdea(int index, std::string idea)
+{
+	this->_brain->setIdea(index, idea);
+}
+
+void Dog::makeSound() const
+{
+	std::cout << GREEN << "BARK BARK BARK!" << RESET << std::endl;
 }

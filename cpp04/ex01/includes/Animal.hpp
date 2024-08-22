@@ -4,6 +4,7 @@
 
 # include <iostream>
 # include <string>
+# include <math.h>
 
 const std::string RED = "\033[1;31m";
 const std::string GREEN = "\033[1;32m";

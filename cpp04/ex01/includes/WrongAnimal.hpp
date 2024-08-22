@@ -4,7 +4,6 @@
 
 # include <iostream>
 # include <string>
-# include "./Animal.hpp"
 
 // Class declaration
 class WrongAnimal

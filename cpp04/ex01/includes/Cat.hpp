@@ -2,12 +2,11 @@
 #ifndef CAT_HPP_
 # define CAT_HPP_
 
-# include <iostream>
-# include <string>
+# include "./Brain.hpp"
 # include "./Animal.hpp"
 
 // Class declaration
-class Cat: public Animal
+class Cat : public Animal
 {
   public:
 	Cat();
@@ -20,9 +19,11 @@ class Cat: public Animal
 	// Getters
 	std::string getType(void) const;
 	virtual void makeSound(void) const;
+	std::string getIdea(int index) const;
+	void setIdea(int index, std::string idea);
 
-  protected:
-	std::string _type;
+  private:
+	Brain *_brain;
 };
 
 #endif

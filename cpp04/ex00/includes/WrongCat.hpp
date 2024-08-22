@@ -20,9 +20,6 @@ class WrongCat: public WrongAnimal
 	// Getters
 	std::string getType(void) const;
 	virtual void makeSound(void) const;
-
-  protected:
-	std::string _type;
 };
 
 #endif

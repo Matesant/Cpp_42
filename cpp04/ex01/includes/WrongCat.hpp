@@ -2,12 +2,12 @@
 #ifndef WRONGCAT_HPP_
 # define WRONGCAT_HPP_
 
+# include "./WrongAnimal.hpp"
 # include <iostream>
 # include <string>
-# include "./WrongAnimal.hpp"
 
 // Class declaration
-class WrongCat: public WrongAnimal
+class WrongCat : public WrongAnimal
 {
   public:
 	WrongCat();

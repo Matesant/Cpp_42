@@ -6,6 +6,7 @@
 # include <string>
 # include "./Animal.hpp"
 
+
 // Class declaration
 class Cat: public Animal
 {
@@ -20,9 +21,6 @@ class Cat: public Animal
 	// Getters
 	std::string getType(void) const;
 	virtual void makeSound(void) const;
-
-  protected:
-	std::string _type;
 };
 
 #endif

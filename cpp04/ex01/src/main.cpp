@@ -2,68 +2,81 @@
 #include "./includes/Dog.hpp"
 #include "./includes/WrongCat.hpp"
 
-int main(void)
+int	main(void)
 {
-	Animal *randonAnimal;
-	Animal *dogAnimal;
-	Animal *catAnimal;
+	Animal	*animals[6];
 
 	std::cout << INVERSE << YELLOW << "------------------------------------------------------------" << std::endl;
-	std::cout << INVERSE << YELLOW << "--------- INSTANTIATE DOG, CAT & ANIMAL OBJECTS ------------" << std::endl;
+	std::cout << INVERSE << YELLOW << "----------------------- ANIMAL LOOP ------------------------" << std::endl;
 	std::cout << INVERSE << YELLOW << "------------------------------------------------------------" << RESET << std::endl;
-
-	randonAnimal = new Animal();
-	dogAnimal = new Dog();
-	catAnimal = new Cat();
-
+	for (int i = 0; i < 6; i++)
+	{
+		if (i % 2 == 0)
+			animals[i] = new Dog();
+		else
+			animals[i] = new Cat();
+	}
 	std::cout << std::endl;
 	std::cout << INVERSE << YELLOW << "------------------------------------------------------------" << std::endl;
-	std::cout << INVERSE << YELLOW << "----------------- PRINTING ANIMAL TYPES --------------------" << std::endl;
+	std::cout << INVERSE << YELLOW << "----------------- TESTING IDEAS,SOUNDS & TYPES -------------" << std::endl;
 	std::cout << INVERSE << YELLOW << "------------------------------------------------------------" << RESET << std::endl;
-
-	std::cout << BOLD << "THE ANIMAL CLASS HAS TYPE: " << MAGENTA << randonAnimal->getType() << " " << RESET << std::endl;
-	std::cout << BOLD << "THE DOG CLASS HAS TYPE: " << MAGENTA << dogAnimal->getType() << " " << RESET << std::endl;
-	std::cout << BOLD << "THE CAT CLASS HAS TYPE: " << MAGENTA << catAnimal->getType() << " " << RESET << std::endl;
-
+	for (int i = 0; i < 6; i++)
+	{
+		if (i % 2 == 0)
+		{
+			std::cout << MAGENTA << animals[i]->getType() << RESET << BOLD << " has an idea: " << GREEN << "BARK BARK BARK!" << RESET << std::endl;
+			std::cout << BOLD << "Translated to: " << MAGENTA << ((Dog *)animals[i])->getIdea(i) << RESET << std::endl;
+		}
+		else
+		{
+			std::cout << MAGENTA << animals[i]->getType() << RESET << BOLD << " has an idea: " << GREEN << "MEOOOW MEOW!" << RESET << std::endl;
+			std::cout << BOLD << "Translated to: " << MAGENTA << ((Cat *)animals[i])->getIdea(i) << RESET << std::endl;
+		}
+	}
 	std::cout << std::endl;
+
 	std::cout << INVERSE << YELLOW << "------------------------------------------------------------" << std::endl;
-	std::cout << INVERSE << YELLOW << "----------------- MAKING SOUNDS ----------------------------" << std::endl;
+	std::cout << INVERSE << YELLOW << "------------------ DEEP COPY FROM ARRAY --------------------" << std::endl;
 	std::cout << INVERSE << YELLOW << "------------------------------------------------------------" << RESET << std::endl;
-
-	randonAnimal->makeSound();
-	dogAnimal->makeSound();
-	catAnimal->makeSound();
-
+	{
+		Dog copy_dog((Dog &)*animals[0]);
+		Cat copy_cat((Cat &)*animals[1]);
+		std::cout << INVERSE << YELLOW << "------------------ ORIGINAL ANIMALS ------------------------" << RESET << std::endl;
+		std::cout << MAGENTA << animals[0]->getType() << RESET << BOLD << " has an idea: " << GREEN << "BARK BARK BARK!" << RESET << std::endl;
+		std::cout << BOLD << "Translated to: " << MAGENTA << ((Dog *)animals[0])->getIdea(12) << RESET << std::endl;
+		std::cout << MAGENTA << animals[1]->getType() << RESET << BOLD << " has an idea: " << GREEN << "MEOOOW MEOW!" << RESET << std::endl;
+		std::cout << BOLD << "Translated to: " << MAGENTA << ((Cat *)animals[1])->getIdea(34) << RESET << std::endl;
+		std::cout << INVERSE << YELLOW << "------------------ COPIED ANIMALS --------------------------" << RESET << std::endl;
+		std::cout << MAGENTA << animals[0]->getType() << RESET << BOLD << " has an idea: " << GREEN << "BARK BARK BARK!" << RESET << std::endl;
+		std::cout << BOLD << "Translated to: " << MAGENTA << ((Dog *)animals[0])->getIdea(12) << RESET << std::endl;
+		std::cout << MAGENTA << animals[1]->getType() << RESET << BOLD << " has an idea: " << GREEN << "MEOOOW MEOW!" << RESET << std::endl;
+		std::cout << BOLD << "Translated to: " << MAGENTA << ((Cat *)animals[1])->getIdea(34) << RESET << std::endl;
+		std::cout << INVERSE << YELLOW << "-------------- DESCTRUCTORS CALLED -------------------------" << RESET << std::endl;
+	}
+	std::cout << INVERSE << YELLOW << "------------------------------------------------------------" << RESET << std::endl;
+	
+	std::cout << INVERSE << YELLOW << "------------------------------------------------------------" << std::endl;
+	std::cout << INVERSE << YELLOW << "----------------------- DELETING ANIMALS -------------------" << std::endl;
+	std::cout << INVERSE << YELLOW << "------------------------------------------------------------" << RESET << std::endl;
+	for (int i = 0; i < 6; i++)
+		delete animals[i];
 	std::cout << std::endl;
-	std::cout << INVERSE << YELLOW << "------------------------------------------------------------" << std::endl;
-	std::cout << INVERSE << YELLOW << "--------- INSTANTIATE WRONG ANIMAL & CAT OBJECTS -----------" << std::endl;
-	std::cout << INVERSE << YELLOW << "------------------------------------------------------------" << RESET << std::endl;
 
-	WrongAnimal *wrongAnimal = new WrongAnimal();
-	WrongAnimal *wrongCat = new WrongCat();
+	std::cout << INVERSE << YELLOW << "------------------------------------------------------------" << std::endl;
+	std::cout << INVERSE << YELLOW << "----------------------- TESTING DEEP COPY ------------------" << std::endl;
+	std::cout << INVERSE << YELLOW << "------------------------------------------------------------" << RESET << std::endl;
+	{
+		Cat		cat1;
+		std::cout << INVERSE << CYAN << "Cat 1 ideas: " << cat1.getIdea(0) << RESET << std::endl;
+		Cat		cat2(cat1);
+		std::cout << INVERSE << CYAN << "Cat 2 ideas after copy: " << cat2.getIdea(0) << std::endl;
+		std::cout << INVERSE << CYAN << "Changing Cat 1 idea" << std::endl;
+		cat1.setIdea(0, "I am a new cat");
+		std::cout << INVERSE << CYAN << "Cat 1 ideas: " << cat1.getIdea(0) << RESET << std::endl;
+		std::cout << INVERSE << CYAN << "Cat 2 ideas after change in Cat 1: " << cat2.getIdea(0) << RESET << std::endl;
+	}
 	std::cout << std::endl;
-	std::cout << INVERSE << YELLOW << "------------------------------------------------------------" << std::endl;
-	std::cout << INVERSE << YELLOW << "--------------- PRINTING WRONG ANIMAL TYPES ----------------" << std::endl;
-	std::cout << INVERSE << YELLOW << "------------------------------------------------------------" << RESET << std::endl;
 
-	std::cout << BOLD << "THE WRONG ANIMAL CLASS HAS TYPE: " << MAGENTA << wrongAnimal->getType() << " " << RESET << std::endl;
-	std::cout << BOLD << "THE WRONG CAT CLASS HAS TYPE: " << MAGENTA << wrongCat->getType() << " " << RESET << std::endl;
 
-	std::cout << std::endl;
-	std::cout << INVERSE << YELLOW << "------------------------------------------------------------" << std::endl;
-	std::cout << INVERSE << YELLOW << "----------------- MAKING SOUNDS ----------------------------" << std::endl;
-	std::cout << INVERSE << YELLOW << "------------------------------------------------------------" << RESET << std::endl;
-
-	wrongAnimal->makeSound();
-	wrongCat->makeSound();
-	std::cout << INVERSE << YELLOW << "----------------- DELETING OBJECTS -------------------------" << std::endl;
-	std::cout << INVERSE << YELLOW << "------------------------------------------------------------" << RESET << std::endl;
-
-	delete randonAnimal;
-	delete dogAnimal;
-	delete catAnimal;
-	delete wrongAnimal;
-	delete wrongCat;
-
-	return 0;
+	return (0);
 }

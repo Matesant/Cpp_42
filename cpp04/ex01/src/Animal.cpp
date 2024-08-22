@@ -13,6 +13,7 @@ Animal::Animal(std::string name) : _type(name)
 Animal::~Animal()
 {
 	std::cout << RED << "Animal Destructor called" << RESET << std::endl;
+
 }
 
 Animal::Animal(const Animal &copy)
