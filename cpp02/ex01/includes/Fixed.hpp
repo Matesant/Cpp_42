@@ -25,9 +25,9 @@ class Fixed
 {
   public:
 	Fixed(void);
-	Fixed(Fixed const &src);
-	Fixed(const int value);
 	Fixed(const float value);
+	Fixed(const int value);
+	Fixed(Fixed const &src);
 	~Fixed(void);
 
 	Fixed &operator=(Fixed const &rigthSide);

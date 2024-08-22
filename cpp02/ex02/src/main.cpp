@@ -20,6 +20,7 @@ int	main(void)
 	Fixed b(10);
 	Fixed const c(10);
 	Fixed const d(10);
+	Fixed const e( Fixed( 5.05f ) * Fixed( 2 ) );
 	std::cout << INVERSE << BOLD_CYAN << "Value of a: " << RESET << a << std::endl;
 	std::cout << INVERSE << BOLD_CYAN << "Value of b: " << RESET << b << std::endl;
 	std::cout << INVERSE << "Testing comparison operators" << RESET << std::endl;
@@ -37,6 +38,8 @@ int	main(void)
 	a.setRawBits(5);
 	std::cout << INVERSE << "Testing increment and decrement operators" << RESET << std::endl;
 	std::cout << ++a << std::endl;
+	std::cout << "Printing a after increment" << std::endl;
+	std::cout << a << std::endl;
 	std::cout << INVERSE << "Reseting a to 5 before next increment" << RESET << std::endl;
 	a.setRawBits(5);
 	std::cout << a++ << std::endl;
@@ -47,12 +50,14 @@ int	main(void)
 	std::cout << INVERSE << "Reseting a to 5 before decrement" << RESET << std::endl;
 	a.setRawBits(5);
 	std::cout << a-- << std::endl;
+	std::cout << "Printing a after decrement" << std::endl;
+	std::cout << a << std::endl;
 	std::cout << INVERSE << "Testing min and max functions" << RESET << std::endl;
-	std::cout << Fixed::min(a, b) << std::endl;
+	std::cout << Fixed::min(e, b) << std::endl;
 	std::cout << Fixed::max(a, b) << std::endl;
 	std::cout << INVERSE << "Testing min and max functions with const Fixed" << RESET << std::endl;
 	std::cout << Fixed::min(c, d) << std::endl;
-	std::cout << Fixed::max(c, d) << std::endl;
+	std::cout << Fixed::max(c, e) << std::endl;
 	subjectTest();
 	return (0);
 }
