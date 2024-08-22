@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 15:51:20 by matesant          #+#    #+#             */
-/*   Updated: 2024/08/16 18:55:16 by matesant         ###   ########.fr       */
+/*   Updated: 2024/08/22 12:03:40 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int	main(int argc, char **argv)
 		std::cout << BOLD << BRIGHT_RED << "Error: " << RESET << "Could not open file." << std::endl;
 		return (1);
 	}
-	newSed.formatExtension();
 	if (mySed(file, newSed.getNeedle(), newSed.getHaystack(), newSed))
 		return (1);
 	file.close();

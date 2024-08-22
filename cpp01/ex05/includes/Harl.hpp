@@ -15,13 +15,14 @@ const std::string YELLOW = "\033[33m";
 const std::string INVERSE = "\033[7m";
 const std::string BRIGHT_MAGENTA = "\033[95m";
 
-
 // Class declaration
 class Harl
 {
   public:
-  Harl(void);
-  ~Harl(void);
+	Harl(void);
+	~Harl(void);
+
+	// member functions
 	void complain(std::string level);
 
   private:

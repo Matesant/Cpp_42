@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 15:56:49 by matesant          #+#    #+#             */
-/*   Updated: 2024/08/15 19:27:11 by matesant         ###   ########.fr       */
+/*   Updated: 2024/08/22 12:03:01 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ class Replace
 	std::string getFilename(void) const;
 	std::string getHaystack(void) const;
 	std::string getNeedle(void) const;
-	void formatExtension(void);
 
   private:
 	std::string _filename;

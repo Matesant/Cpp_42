@@ -14,6 +14,9 @@ int	main(void)
 		club.setType("some other type of club");
 		std::cout << BOLD << RED << "BOB ATTACKS" << RESET << std::endl;
 		bob.attack();
+		std::cout << BOLD << INVERSE << "MAKING HUMAN_B AND ATTACKING" << RESET << std::endl;
+		HumanB jim("Jim");
+		jim.attack();
 	}
 	{
 		std::cout << BOLD << INVERSE << "CREATING WEAPON TYPE 'CLUB' FOR HUMAN_B" << RESET << std::endl;
@@ -27,6 +30,10 @@ int	main(void)
 		jim.attack();
 		std::cout << BOLD << INVERSE << "CHANGING WEAPON TYPE TO 'SOME OTHER TYPE OF CLUB'" << RESET << std::endl;
 		club.setType("some other type of club");
+		std::cout << BOLD << RED << "JIM ATTACKS" << RESET << std::endl;
+		jim.attack();
+		std::cout << BOLD << INVERSE << "TAKING AWAY HUMAN_B WEAPON" << RESET << std::endl;
+		club.setType("");
 		std::cout << BOLD << RED << "JIM ATTACKS" << RESET << std::endl;
 		jim.attack();
 	}
