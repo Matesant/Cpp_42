@@ -4,7 +4,7 @@
 
 int	main(void)
 {
-	Animal	*animals[6];
+	AAnimal	*animals[6];
 
 	std::cout << INVERSE << YELLOW << "------------------------------------------------------------" << std::endl;
 	std::cout << INVERSE << YELLOW << "----------------------- ANIMAL LOOP ------------------------" << std::endl;

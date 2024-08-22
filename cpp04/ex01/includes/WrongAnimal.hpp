@@ -2,8 +2,7 @@
 #ifndef WRONGANIMAL_HPP_
 # define WRONGANIMAL_HPP_
 
-# include <iostream>
-# include <string>
+# include "./Utils.hpp"
 
 // Class declaration
 class WrongAnimal
