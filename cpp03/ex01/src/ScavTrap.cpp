@@ -100,13 +100,6 @@ void ScavTrap::beRepaired(unsigned int amount)
 				  << RESET << std::endl;
 		return;
 	}
-	if (this->_hitPoints + amount > 100)
-	{
-		std::cout << YELLOW << "ScavTrap " << MAGENTA
-				  << this->_name << YELLOW << " cannot be repaired more than "
-				  << GREEN << 100 << YELLOW << " hit points" << RESET << std::endl;
-		return;
-	}
 	this->_hitPoints += amount;
 	this->_energyPoints -= 1;
 	std::cout << YELLOW << "ScavTrap " << MAGENTA << this->_name

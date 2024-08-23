@@ -14,7 +14,7 @@ ClapTrap::ClapTrap(std::string name) : _name(name), _hitPoints(10), _energyPoint
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << RED << "Destructor called" << RESET << std::endl;
+	std::cout << RED << "ClapTrap Destructor called" << RESET << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap &copy)
@@ -80,13 +80,6 @@ void ClapTrap::beRepaired(unsigned int amount)
 	else if (this->_energyPoints == 0)
 	{
 		std::cout << YELLOW << "ClapTrap " << MAGENTA << this->_name << YELLOW << " has no energy points and cannot be repaired" << RESET << std::endl;
-		return;
-	}
-	if (this->_hitPoints + amount > 10)
-	{
-		std::cout << YELLOW << "ScavTrap " << MAGENTA
-				  << this->_name << YELLOW << " cannot be repaired more than "
-				  << GREEN << 100 << YELLOW << " hit points" << RESET << std::endl;
 		return;
 	}
 	this->_hitPoints += amount;

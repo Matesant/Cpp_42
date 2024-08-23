@@ -3,8 +3,8 @@
 FragTrap::FragTrap(void) : ClapTrap()
 {
 	this->_hitPoints = 100;
-	this->_energyPoints = 50;
-	this->_attackDamage = 20;
+	this->_energyPoints = 100;
+	this->_attackDamage = 30;
 	std::cout << RESET << BOLD << "Creating a FragTrap from a ClapTrap with no name with " 
 	<< GREEN << this->_hitPoints << RESET << BOLD << " hit points, "
 	<< MAGENTA << this->_energyPoints << RESET << BOLD << " energy points and " 
@@ -13,8 +13,8 @@ FragTrap::FragTrap(void) : ClapTrap()
 FragTrap::FragTrap(std::string name) : ClapTrap(name)
 {
 	this->_hitPoints = 100;
-	this->_energyPoints = 50;
-	this->_attackDamage = 20;
+	this->_energyPoints = 100;
+	this->_attackDamage = 30;
 	std::cout << RESET << BOLD << "FragTrap " << MAGENTA << this->_name << RESET << BOLD << " was created from a ClapTrap with "
 			  << GREEN << _hitPoints << RESET << BOLD << " hit points, "
 			  << MAGENTA << _energyPoints << RESET << BOLD << " energy points and "
@@ -98,13 +98,6 @@ void FragTrap::beRepaired(unsigned int amount)
 		std::cout << YELLOW << "FragTrap " << MAGENTA
 				  << this->_name << YELLOW << " has no energy points and cannot be repaired"
 				  << RESET << std::endl;
-		return;
-	}
-	if (this->_hitPoints + amount > 100)
-	{
-		std::cout << YELLOW << "FragTrap " << MAGENTA
-				  << this->_name << YELLOW << " cannot be repaired more than "
-				  << GREEN << 100 << YELLOW << " hit points" << RESET << std::endl;
 		return;
 	}
 	this->_hitPoints += amount;

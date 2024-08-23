@@ -2,11 +2,11 @@
 
 int	main(void)
 {
-	std::cout << INVERSE << "CREATING SCAVTRAP" << RESET << std::endl;
+	std::cout << INVERSE << CYAN << "CREATING SCAVTRAP" << RESET << std::endl;
 	ScavTrap ScavTrap1("CARAMEL");
 	ScavTrap ScavTrap2("jorge");
 
-	std::cout << "ATTACKING SCAVTRAP" << std::endl;
+	std::cout << INVERSE << CYAN << "ATTACKING SCAVTRAP" << RESET << std::endl;
 	ScavTrap1.attack(ScavTrap2.getName());
 	ScavTrap2.takeDamage(ScavTrap1.getAttackDamage());
 	ScavTrap2.beRepaired(5);

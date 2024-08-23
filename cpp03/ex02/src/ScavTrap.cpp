@@ -3,8 +3,8 @@
 ScavTrap::ScavTrap(void) : ClapTrap()
 {
 	this->_hitPoints = 100;
-	this->_energyPoints = 100;
-	this->_attackDamage = 30;
+	this->_energyPoints = 50;
+	this->_attackDamage = 20;
 	std::cout << RESET << BOLD << "Creating a ScavTrap from a ClapTrap with no name with " 
 	<< GREEN << this->_hitPoints << RESET << BOLD << " hit points, "
 	<< MAGENTA << this->_energyPoints << RESET << BOLD << " energy points and " 
@@ -74,7 +74,7 @@ void ScavTrap::takeDamage(unsigned int amount)
 	if (this->_hitPoints <= 0)
 	{
 		std::cout << YELLOW << "ScavTrap " << MAGENTA
-				  << this->_name << YELLOW << " is already dead" << RESET << std::endl;
+				  << this->_name << YELLOW << " is dead" << RESET << std::endl;
 		return;
 	}
 	this->_hitPoints -= amount;
@@ -98,13 +98,6 @@ void ScavTrap::beRepaired(unsigned int amount)
 		std::cout << YELLOW << "ScavTrap " << MAGENTA
 				  << this->_name << YELLOW << " has no energy points and cannot be repaired"
 				  << RESET << std::endl;
-		return;
-	}
-	if (this->_hitPoints + amount > 100)
-	{
-		std::cout << YELLOW << "ScavTrap " << MAGENTA
-				  << this->_name << YELLOW << " cannot be repaired more than "
-				  << GREEN << 100 << YELLOW << " hit points" << RESET << std::endl;
 		return;
 	}
 	this->_hitPoints += amount;
