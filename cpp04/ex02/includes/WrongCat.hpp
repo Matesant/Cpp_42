@@ -5,22 +5,19 @@
 # include "./WrongAnimal.hpp"
 
 // Class declaration
-class WrongCat : public WrongAnimal
+class WrongCat: public WrongAnimal
 {
   public:
 	WrongCat();
 	WrongCat(std::string name);
 	WrongCat(const WrongCat &other);
-	virtual ~WrongCat();
+	~WrongCat();
 
 	WrongCat &operator=(const WrongCat &rigthSide);
 
 	// Getters
 	std::string getType(void) const;
-	virtual void makeSound(void) const;
-
-  protected:
-	std::string _type;
+	void makeSound(void) const;
 };
 
 #endif

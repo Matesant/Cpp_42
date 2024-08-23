@@ -41,6 +41,8 @@ int main(void)
 
 	WrongAnimal *wrongAnimal = new WrongAnimal();
 	WrongAnimal *wrongCat = new WrongCat();
+	WrongCat *wrongCat2 = new WrongCat();
+
 	std::cout << std::endl;
 	std::cout << INVERSE << YELLOW << "------------------------------------------------------------" << std::endl;
 	std::cout << INVERSE << YELLOW << "--------------- PRINTING WRONG ANIMAL TYPES ----------------" << std::endl;
@@ -48,6 +50,7 @@ int main(void)
 
 	std::cout << BOLD << "THE WRONG ANIMAL CLASS HAS TYPE: " << MAGENTA << wrongAnimal->getType() << " " << RESET << std::endl;
 	std::cout << BOLD << "THE WRONG CAT CLASS HAS TYPE: " << MAGENTA << wrongCat->getType() << " " << RESET << std::endl;
+	std::cout << BOLD << "THE WRONG CAT CLASS HAS TYPE: " << MAGENTA << wrongCat2->getType() << " " << RESET << std::endl;
 
 	std::cout << std::endl;
 	std::cout << INVERSE << YELLOW << "------------------------------------------------------------" << std::endl;
@@ -56,6 +59,7 @@ int main(void)
 
 	wrongAnimal->makeSound();
 	wrongCat->makeSound();
+	wrongCat2->makeSound();
 	std::cout << INVERSE << YELLOW << "----------------- DELETING OBJECTS -------------------------" << std::endl;
 	std::cout << INVERSE << YELLOW << "------------------------------------------------------------" << RESET << std::endl;
 
@@ -64,6 +68,7 @@ int main(void)
 	delete catAnimal;
 	delete wrongAnimal;
 	delete wrongCat;
+	delete wrongCat2;
 
 	return 0;
 }
