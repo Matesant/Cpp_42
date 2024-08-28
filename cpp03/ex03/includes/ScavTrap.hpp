@@ -6,7 +6,7 @@
 # include "ClapTrap.hpp"
 
 // Class declaration
-class ScavTrap : public ClapTrap
+class ScavTrap : virtual public ClapTrap
 {
   public:
 	ScavTrap();
@@ -14,7 +14,7 @@ class ScavTrap : public ClapTrap
 	ScavTrap(const ScavTrap &copy);
 	~ScavTrap();
 
-	ScavTrap &operator=(const ScavTrap &rigthSide);
+	ScavTrap &operator=(const ScavTrap &rightSide);
 	// member functions
 	void attack(std::string const &target);
 	void guardGate();

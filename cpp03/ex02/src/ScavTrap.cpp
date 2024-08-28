@@ -26,14 +26,23 @@ ScavTrap::~ScavTrap(void)
 	std::cout << RED << "ScavTrap Destructor called" << RESET << std::endl;
 }
 
-ScavTrap &ScavTrap::operator=(ScavTrap const &rigthSide)
+ScavTrap::ScavTrap(const ScavTrap &copy) : ClapTrap(copy) 
 {
-	std::cout << MAGENTA << "Assignation operator called" << RESET << std::endl;
-	this->_name = rigthSide._name;
-	this->_hitPoints = rigthSide._hitPoints;
-	this->_energyPoints = rigthSide._energyPoints;
-	this->_attackDamage = rigthSide._attackDamage;
-	return (*this);
+    std::cout << "ScavTrap Copy Constructor called" << std::endl;
+    *this = copy;
+}
+
+ScavTrap &ScavTrap::operator=(ScavTrap const &rightSide)
+{
+	std::cout << "Assignation operator called" << std::endl;
+    if (this != &rightSide) {
+        ClapTrap::operator=(rightSide);
+        this->_name = rightSide._name;
+        this->_hitPoints = rightSide._hitPoints;
+        this->_energyPoints = rightSide._energyPoints;
+        this->_attackDamage = rightSide._attackDamage;
+    }
+    return *this;
 }
 
 int ScavTrap::getAttackDamage(void) const
@@ -66,46 +75,6 @@ void ScavTrap::attack(std::string const &target)
 			  << YELLOW << ", causing " << RED << this->_attackDamage
 			  << YELLOW << " points of damage and now have " << MAGENTA
 			  << this->_energyPoints << YELLOW
-			  << " energy points" << RESET << std::endl;
-}
-
-void ScavTrap::takeDamage(unsigned int amount)
-{
-	if (this->_hitPoints <= 0)
-	{
-		std::cout << YELLOW << "ScavTrap " << MAGENTA
-				  << this->_name << YELLOW << " is dead" << RESET << std::endl;
-		return;
-	}
-	this->_hitPoints -= amount;
-	std::cout << YELLOW << "ScavTrap " << MAGENTA
-			  << this->_name << YELLOW << " takes " << RED
-			  << amount << YELLOW << " points of damage and now have "
-			  << GREEN << this->_hitPoints << YELLOW << " hit points" << RESET << std::endl;
-}
-
-void ScavTrap::beRepaired(unsigned int amount)
-{
-	if (this->_hitPoints <= 0)
-	{
-		std::cout << YELLOW << "ScavTrap " << MAGENTA
-				  << this->_name << YELLOW << " is dead and cannot be repaired"
-				  << RESET << std::endl;
-		return;
-	}
-	else if (this->_energyPoints == 0)
-	{
-		std::cout << YELLOW << "ScavTrap " << MAGENTA
-				  << this->_name << YELLOW << " has no energy points and cannot be repaired"
-				  << RESET << std::endl;
-		return;
-	}
-	this->_hitPoints += amount;
-	this->_energyPoints -= 1;
-	std::cout << YELLOW << "ScavTrap " << MAGENTA << this->_name
-			  << YELLOW << " is repaired by " << BLUE << amount << YELLOW
-			  << " points and now have " << GREEN << this->_hitPoints << YELLOW
-			  << " hit points and " << MAGENTA << this->_energyPoints << YELLOW
 			  << " energy points" << RESET << std::endl;
 }
 

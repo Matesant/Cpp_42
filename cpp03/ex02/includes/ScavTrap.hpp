@@ -17,8 +17,6 @@ class ScavTrap : public ClapTrap
 	ScavTrap &operator=(const ScavTrap &rigthSide);
 	// member functions
 	void attack(std::string const &target);
-	void takeDamage(unsigned int amount);
-	void beRepaired(unsigned int amount);
 	void guardGate();
 
 	// Getters

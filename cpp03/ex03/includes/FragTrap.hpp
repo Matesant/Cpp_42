@@ -6,7 +6,7 @@
 # include <string>
 
 // Class declaration
-class FragTrap : public ClapTrap
+class FragTrap : virtual public ClapTrap
 {
   public:
 	FragTrap();
