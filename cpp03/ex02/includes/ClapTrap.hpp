@@ -42,4 +42,3 @@ class ClapTrap {
 };
 
 #endif // CLAPTRAP_HPP_
-
