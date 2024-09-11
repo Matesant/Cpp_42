@@ -1,13 +1,15 @@
-
 #ifndef CHARACTER_HPP
 # define CHARACTER_HPP
 
 # include "AMateria.hpp"
+#include "ICharacter.hpp"
+
 
 class Character : public ICharacter
 {
   public:
 	Character();
+	Character(std::string const &name);
 	Character(const Character &other);
 	Character &operator=(const Character &rhs);
 	virtual ~Character();

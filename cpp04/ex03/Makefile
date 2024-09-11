@@ -13,12 +13,13 @@ DEFAULT_GOAL: all
 
 # Compiler and flags
 CC		=	c++
-CFLAGS	=	-Wall -Werror -Wextra -std=c++98 -I.
+CFLAGS	=	-Wall -Werror -Wextra -std=c++98 -g3 -I.
 RM		=	rm -rf
 
 # Dir and file names
 NAME	=	Mages
-SRCS	=	./src/main.cpp ./src/AMateria.cpp
+SRCS	=	./src/main.cpp ./src/AMateria.cpp ./src/Ice.cpp ./src/Cure.cpp \
+			./src/Character.cpp ./src/MateriaSource.cpp
 
 BIN_DIR =	./bin
 OBJS	=	$(addprefix $(BIN_DIR)/, $(notdir $(SRCS:.cpp=.o)))
