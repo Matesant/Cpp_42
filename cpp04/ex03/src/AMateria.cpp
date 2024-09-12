@@ -24,7 +24,7 @@ AMateria &AMateria::operator=(const AMateria &rhs)
 
 AMateria::~AMateria()
 {
-	std::cout << "AMateria destructor" << std::endl;
+	std::cout << RED << "AMateria destructor" << RESET << std::endl;
 }
 
 std::string const &AMateria::getType() const

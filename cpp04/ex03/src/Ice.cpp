@@ -17,7 +17,7 @@ Ice &Ice::operator=(const Ice &rhs)
 
 Ice::~Ice()
 {
-	std::cout << "Ice destructor" << std::endl;
+	std::cout << RED << "Ice destructor" << RESET << std::endl;
 }
 
 AMateria *Ice::clone() const
@@ -27,5 +27,5 @@ AMateria *Ice::clone() const
 
 void Ice::use(ICharacter &target)
 {
-	std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;
+	std::cout << BLUE << "* shoots an ice bolt at " << target.getName() << " *" << RESET << std::endl;
 }

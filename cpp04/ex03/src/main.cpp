@@ -1,19 +1,42 @@
-#include "./includes/Ice.hpp"
-#include "./includes/Cure.hpp"
 #include "./includes/Character.hpp"
+#include "./includes/Cure.hpp"
+#include "./includes/Ice.hpp"
+#include "./includes/MateriaSource.hpp"
 
-int main(void)
+int	main(void)
 {
-	Ice *ice = new Ice();
-	Cure *cure = new Cure();
-	Character jorge("Jorge");
-	Character xialiong("Xialiong");
+	IMateriaSource	*src;
+	ICharacter		*me;
+	AMateria		*tmp;
+	ICharacter		*bob;
 
-	jorge.equip(ice);
-	jorge.equip(cure);
-	jorge.equip(ice);
-	jorge.use(0, xialiong);
-	jorge.use(2, xialiong);
+	std::cout << CYAN << INVERSE << "--------------------------------------------------" << RESET << std::endl;
+	std::cout << CYAN << INVERSE << "Creating MateriaSource, Character, Ice, Cure" << RESET << std::endl;
+	src = new MateriaSource();
+	src->learnMateria(new Ice());
+	src->learnMateria(new Cure());
+	me = new Character("me");
+	bob = new Character("bob");
+	std::cout << CYAN << INVERSE << "--------------------------------------------------" << RESET << std::endl;
+	std::cout << CYAN << INVERSE << "Equipping Ice and Cure" << RESET << std::endl;
+	tmp = src->createMateria("ice");
+	me->equip(tmp);
+	tmp = src->createMateria("cure");
+	me->equip(tmp);
+	me->equip(tmp);
+	std::cout << CYAN << INVERSE << "--------------------------------------------------" << RESET << std::endl;
+	std::cout << CYAN << INVERSE << "Using Ice and Cure" << RESET << std::endl;
+	me->use(0, *bob);
+	me->use(1, *bob);
+	std::cout << CYAN << INVERSE << "--------------------------------------------------" << RESET << std::endl;
+	std::cout << CYAN << INVERSE << "Unequipping Ice" << RESET << std::endl;
+	me->unequip(1);
+	std::cout << CYAN << INVERSE << "--------------------------------------------------" << RESET << std::endl;
+
+	delete			bob;
+	delete			me;
+	delete			src;
+	delete 			tmp;
 
 	return (0);
 }
