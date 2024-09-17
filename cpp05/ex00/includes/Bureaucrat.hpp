@@ -1,37 +1,52 @@
 #ifndef BUREAUCRAT_HPP_
-#define BUREAUCRAT_HPP_
+# define BUREAUCRAT_HPP_
 
-#include <string>
-#include <iostream>
+# include <iostream>
+# include <string>
 
-const std::string RED = "\033[1;31m";
-const std::string GREEN = "\033[1;32m";
-const std::string CYAN = "\033[1;36m";
-const std::string YELLOW = "\033[1;33m";
-const std::string MAGENTA = "\033[1;95m";
-const std::string BLUE = "\033[1;34m";
-const std::string BOLD = "\033[1m";
-const std::string RESET = "\033[0m";
-const std::string INVERSE = "\033[7m";
+# define RED "\033[1;31m"
+# define GREEN "\033[1;32m"
+# define CYAN "\033[1;36m"
+# define YELLOW "\033[1;33m"
+# define MAGENTA "\033[1;95m"
+# define BLUE "\033[1;34m"
+# define BOLD "\033[1m"
+# define RESET "\033[0m"
+# define INVERSE "\033[7m"
 
 // Class declaration
-class Bureaucrat {
+class Bureaucrat
+{
   public:
 	Bureaucrat();
-	Bureaucrat(std::string name);
+	Bureaucrat(std::string name, int grade);
 	Bureaucrat(const Bureaucrat &other);
 	virtual ~Bureaucrat();
 
 	Bureaucrat &operator=(const Bureaucrat &rigthSide);
 
 	// Getters
-	std::string getType(void) const;
+	std::string getName(void) const;
+	int getGrade(void) const;
 
 	// Member functions
+	void incrementGrade(void);
+	void decrementGrade(void);
+
+	class GradeTooHighException : public std::exception
+	{
+		virtual const char *what() const throw();
+	};
+	class GradeTooLowException : public std::exception
+	{
+		virtual const char *what() const throw();
+	};
 
   private:
 	std::string const _name;
 	int _grade;
 };
+
+std::ostream &operator<<(std::ostream &out, Bureaucrat const &value);
 
 #endif
