@@ -2,7 +2,7 @@
 
 MateriaSource::MateriaSource()
 {
-	std::cout << INVERSE << BOLD << "New MateriaSource created" << RESET << std::endl;
+	std::cout << ORANGE << "New MateriaSource created" << RESET << std::endl;
 	for (int i = 0; i < 4; i++)
 		this->_materia[i] = NULL;
 }

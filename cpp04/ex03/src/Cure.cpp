@@ -2,7 +2,7 @@
 
 Cure::Cure() : AMateria("cure") 
 {
-	std::cout << "Cure constructor" << std::endl;
+	std::cout << ORANGE << "Cure constructor" << RESET << std::endl;
 }
 
 Cure::Cure(const Cure &other) : AMateria(other) {}

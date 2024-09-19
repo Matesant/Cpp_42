@@ -13,12 +13,12 @@ DEFAULT_GOAL: all
 
 # Compiler and flags
 CC		=	c++
-CFLAGS	=	-Wall -Werror -Wextra -std=c++98 -I.
+CFLAGS	=	-Wall -Werror -Wextra -std=c++98 -I./includes
 RM		=	rm -rf
 
 # Dir and file names
-NAME	=	Animal
-SRCS	=	./src/main.cpp ./src/Animal.cpp ./src/Dog.cpp ./src/Cat.cpp ./src/WrongAnimal.cpp ./src/WrongCat.cpp
+NAME	=	Forms
+SRCS	=	./src/main.cpp ./src/Bureaucrat.cpp ./src/Form.cpp
 BIN_DIR =	./bin
 OBJS	=	$(addprefix $(BIN_DIR)/, $(notdir $(SRCS:.cpp=.o)))
 INC		=	$(wildcard /includes/*.hpp)
@@ -40,7 +40,7 @@ $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) -o $@
 
 # Compiles sources into objects
-$(BIN_DIR)/%.o: src/%.cpp $(INC)
+$(BIN_DIR)/%.o: ./src/%.cpp $(INC)
 	@echo $(GREEN)[Compiling $<]$(LIMITER) $(WHITE_U)with$(LIMITER) $(CYAN)[$(CC) $(CFLAGS)]$(LIMITER)
 	@$(CC) $(CFLAGS) -c $< -o $@
 

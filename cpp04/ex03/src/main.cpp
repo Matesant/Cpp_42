@@ -11,25 +11,25 @@ int	main(void)
 	ICharacter		*bob;
 
 	std::cout << CYAN << INVERSE << "--------------------------------------------------" << RESET << std::endl;
-	std::cout << CYAN << INVERSE << "Creating MateriaSource, Character, Ice, Cure" << RESET << std::endl;
+	std::cout << CYAN << "Creating MateriaSource, Character, Ice, Cure" << RESET << std::endl;
 	src = new MateriaSource();
 	src->learnMateria(new Ice());
 	src->learnMateria(new Cure());
 	me = new Character("me");
 	bob = new Character("bob");
 	std::cout << CYAN << INVERSE << "--------------------------------------------------" << RESET << std::endl;
-	std::cout << CYAN << INVERSE << "Equipping Ice and Cure" << RESET << std::endl;
+	std::cout << CYAN << "Equipping Ice and Cure" << RESET << std::endl;
 	tmp = src->createMateria("ice");
 	me->equip(tmp);
 	tmp = src->createMateria("cure");
 	me->equip(tmp);
 	me->equip(tmp);
 	std::cout << CYAN << INVERSE << "--------------------------------------------------" << RESET << std::endl;
-	std::cout << CYAN << INVERSE << "Using Ice and Cure" << RESET << std::endl;
+	std::cout << CYAN << "Using Ice and Cure" << RESET << std::endl;
 	me->use(0, *bob);
 	me->use(1, *bob);
 	std::cout << CYAN << INVERSE << "--------------------------------------------------" << RESET << std::endl;
-	std::cout << CYAN << INVERSE << "Unequipping Ice" << RESET << std::endl;
+	std::cout << CYAN << "Unequipping Ice" << RESET << std::endl;
 	me->unequip(1);
 	std::cout << CYAN << INVERSE << "--------------------------------------------------" << RESET << std::endl;
 

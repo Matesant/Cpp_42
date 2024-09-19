@@ -2,12 +2,12 @@
 
 AMateria::AMateria() : _type("default")
 {
-	std::cout << "A new Materia of type default has been created" << std::endl;
+	std::cout << ORANGE << "A new Materia of type default has been created" << RESET << std::endl;
 }
 
 AMateria::AMateria(std::string const &type) : _type(type)
 {
-	std::cout << "A new Materia of type " << type << " has been created" << std::endl;
+	std::cout << ORANGE << "A new Materia of type " << type << " has been created" << RESET << std::endl;
 }
 
 AMateria::AMateria(const AMateria &other) : _type(other._type)

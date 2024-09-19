@@ -1,4 +1,5 @@
-#include "./includes/Bureaucrat.hpp"
+#include "Form.hpp"
+#include "Bureaucrat.hpp"
 
 Bureaucrat::Bureaucrat() : _name("Default")
 {
@@ -76,4 +77,19 @@ std::ostream &operator<<(std::ostream &out, Bureaucrat const &value)
 {
 	out << GREEN << value.getName() << ", bureaucrat grade " << value.getGrade() << RESET;
 	return (out);
+}
+
+void Bureaucrat::signForm(Form &form)
+{
+	if (form.getSigned())
+	{
+		std::cout << YELLOW << "Form " << form.getName() << " is already signed" << RESET << std::endl;
+		return ;
+	}
+	if (this->_grade > form.getGradeToSign())
+	{
+		std::cout << YELLOW << "Bureaucrat " << this->getName() << " cannot sign " << form.getName() << " because his grade is too low" << RESET << std::endl;
+		return ;
+	}
+	form.beSigned(*this);
 }

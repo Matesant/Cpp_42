@@ -5,6 +5,11 @@
 #include <iostream>
 #include <math.h>
 
+#define ORANGE "\033[38;5;208m"
+#define PINK "\033[38;5;213m"
+#define PURPLE "\033[38;5;135m"
+#define GREY "\033[38;5;246m"
+#define BROWN "\033[38;5;130m"
 const std::string RED = "\033[1;31m";
 const std::string GREEN = "\033[1;32m";
 const std::string CYAN = "\033[1;36m";

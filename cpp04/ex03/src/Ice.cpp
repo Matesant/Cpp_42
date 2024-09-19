@@ -2,7 +2,7 @@
 
 Ice::Ice() : AMateria("ice") 
 {
-	std::cout << "Ice constructor" << std::endl;
+	std::cout << ORANGE << "Ice constructor" << RESET << std::endl;
 }
 
 Ice::Ice(const Ice &other) : AMateria(other) {}
