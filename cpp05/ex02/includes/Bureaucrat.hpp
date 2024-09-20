@@ -15,7 +15,7 @@
 # define RESET "\033[0m"
 # define INVERSE "\033[7m"
 
-class Form;
+class AForm;
 
 // Class declaration
 class Bureaucrat
@@ -35,7 +35,8 @@ class Bureaucrat
 	// Member functions
 	void incrementGrade(void);
 	void decrementGrade(void);
-	void signForm(Form &form);
+	void signForm(AForm &form);
+	void executeForm(AForm const &form);
 
 	class GradeTooHighException : public std::exception
 	{

@@ -1,9 +1,10 @@
-#ifndef FORM_HPP
-# define FORM_HPP
+#ifndef AFORM_HPP
+# define AFORM_HPP
 
 # include <iostream>
 # include <stdexcept>
 # include <string>
+# include <cstdlib>
 
 # define RED "\033[1;31m"
 # define GREEN "\033[1;32m"
@@ -15,17 +16,23 @@
 # define RESET "\033[0m"
 # define INVERSE "\033[7m"
 
-class Bureaucrat;
+class	Bureaucrat;
 
 // Class declaration
-class Form
+class AForm
 {
+  private:
+	std::string const _name;
+	bool _signed;
+	int const _gradeToSign;
+	int const _gradeToExecute;
+
   public:
-	Form();
-	Form(std::string name, int gradeToSign, int gradeToExecute);
-	Form(const Form &other);
-	Form &operator=(const Form &rhs);
-	~Form();
+	AForm();
+	AForm(std::string name, int gradeToSign, int gradeToExecute);
+	AForm(const AForm &other);
+	AForm &operator=(const AForm &rhs);
+	~AForm();
 
 	// Getters
 	std::string getName(void) const;
@@ -35,7 +42,7 @@ class Form
 
 	// Member functions
 	void beSigned(Bureaucrat const &bureaucrat);
-	void execute(Bureaucrat const &executor) const;
+	virtual void execute(Bureaucrat const &executor) const = 0;
 
 	class GradeTooLowException : public std::exception
 	{
@@ -45,14 +52,12 @@ class Form
 	{
 		virtual const char *what() const throw();
 	};
-  private:
-	std::string const _name;
-	bool _signed;
-	int const _gradeToSign;
-	int const _gradeToExecute;
-  
+	class FormNotSignedException : public std::exception
+	{
+		virtual const char *what() const throw();
+	};
 };
 
-std::ostream &operator<<(std::ostream &out, Form const &value);
+std::ostream &operator<<(std::ostream &out, AForm const &value);
 
-#endif // FORM_HPP
+#endif // AFORM_HPP
