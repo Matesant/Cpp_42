@@ -15,7 +15,7 @@
 # define RESET "\033[0m"
 # define INVERSE "\033[7m"
 
-class Bureaucrat;
+class	Bureaucrat;
 
 // Class declaration
 class Form
@@ -45,12 +45,16 @@ class Form
 	{
 		virtual const char *what() const throw();
 	};
+	class FormNotSignedException : public std::exception
+	{
+		virtual const char *what() const throw();
+	};
+
   private:
 	std::string const _name;
 	bool _signed;
 	int const _gradeToSign;
 	int const _gradeToExecute;
-  
 };
 
 std::ostream &operator<<(std::ostream &out, Form const &value);

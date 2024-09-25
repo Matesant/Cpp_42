@@ -81,15 +81,13 @@ std::ostream &operator<<(std::ostream &out, Bureaucrat const &value)
 
 void Bureaucrat::signForm(Form &form)
 {
-	if (form.getSigned())
+	try 
 	{
-		std::cout << YELLOW << "Form " << form.getName() << " is already signed" << RESET << std::endl;
-		return ;
+		form.beSigned(*this);
+		std::cout << GREEN << this->getName() << " signs " << form.getName() << RESET << std::endl;
 	}
-	if (this->_grade > form.getGradeToSign())
+	catch (std::exception &e)
 	{
-		std::cout << YELLOW << "Bureaucrat " << this->getName() << " cannot sign " << form.getName() << " because his grade is too low" << RESET << std::endl;
-		return ;
+		std::cout << RED << this->getName() << " cannot sign " << form.getName() << " because " << e.what() << RESET << std::endl;
 	}
-	form.beSigned(*this);
 }
