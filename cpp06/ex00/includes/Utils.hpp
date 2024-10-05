@@ -1,10 +1,13 @@
 #ifndef UTILS_HPP
 # define UTILS_HPP
 
-#include <string>
-#include <iostream>
-#include <math.h>
-#include <stdexcept>
+# include <limits.h>
+# include <cctype>
+# include <cstdlib>
+# include <iomanip>
+# include <iostream>
+# include <string>
+# include <cfloat>
 
 #define ORANGE "\033[38;5;208m"
 #define PINK "\033[38;5;213m"
