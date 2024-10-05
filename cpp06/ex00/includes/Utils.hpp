@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include <math.h>
+#include <stdexcept>
 
 #define ORANGE "\033[38;5;208m"
 #define PINK "\033[38;5;213m"
