@@ -33,6 +33,15 @@ void ScalarConverter::convert(const std::string &str)
 		case CHAR:
 			convertChar(str);
 			break;
+		case INT:
+			convertInt(str);
+			break;
+		case FLOAT:
+			convertFloat(str);
+			break;
+		case DOUBLE:
+			convertDouble(str);
+			break;
 	}
 }
 
@@ -59,15 +68,19 @@ bool ScalarConverter::checkInt(const std::string &str)
 	while (i < (int)str.length())
 	{
 		if (str[i] == '.')
-		{
-			dot++;
-			if (dot > 1 || ((!isdigit(str[i]) && str[i] != '.') && ((i != (int)str.length() -1) && (str[i] != 'f'))))
-			{
-				std::cout << "Error: invalid input" << std::endl;
-				return true;
-			}
-		}
-		if (isdigit(str[i]))
+        {
+            dot++;
+            if (dot > 1)
+            {
+                std::cout << "Error: invalid input" << std::endl;
+                return false;
+            }
+        }
+        else if (!isdigit(str[i]) && !(str[i] == 'f' && i == (int)str.length() - 1))
+        {
+            std::cout << "Error: invalid input" << std::endl;
+            return false;
+        }
 			i++;
 	}
 	if (dot == 0 && str[str.length() - 1] == 'f')
@@ -96,8 +109,45 @@ void ScalarConverter::convertChar(const std::string &str)
 	printDouble(d);
 }
 
-int ScalarConverter::_type = PSEUDO;
-std::string ScalarConverter::_str = "";
+
+void ScalarConverter::convertInt(const std::string &str)
+{
+	int i = atoi(str.c_str());
+	char c = static_cast<char>(i);
+	float f = static_cast<float>(i);
+	double d = static_cast<double>(i);
+
+	printChar(c);
+	printInt(i);
+	printFloat(f);
+	printDouble(d);
+}
+
+void ScalarConverter::convertFloat(const std::string &str)
+{
+	float f = atof(str.c_str());
+	char c = static_cast<char>(f);
+	int i = static_cast<int>(f);
+	double d = static_cast<double>(f);
+
+	printChar(c);
+	printInt(i);
+	printFloat(f);
+	printDouble(d);
+}
+
+void ScalarConverter::convertDouble(const std::string &str)
+{
+	double d = atof(str.c_str());
+	char c = static_cast<char>(d);
+	int i = static_cast<int>(d);
+	float f = static_cast<float>(d);
+
+	printChar(c);
+	printInt(i);
+	printFloat(f);
+	printDouble(d);
+}
 
 void ScalarConverter::printChar(char c)
 {
@@ -139,3 +189,5 @@ void ScalarConverter::printDouble(double d)
 	else
 		std::cout << "impossible" << std::endl;
 }
+int ScalarConverter::_type = PSEUDO;
+std::string ScalarConverter::_str = "";
