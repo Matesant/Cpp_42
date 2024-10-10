@@ -26,6 +26,7 @@ class ScalarConverter
 	static bool checkType(const std::string &str);
 	static bool checkInt(const std::string &str);
 
+	static void printPseudo();
 	static void printChar(char c);
 	static void printInt(int i);
 	static void printFloat(float f);

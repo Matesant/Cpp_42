@@ -30,6 +30,9 @@ void ScalarConverter::convert(const std::string &str)
 		return;
 	switch (_type)
 	{
+		case PSEUDO:
+			printPseudo();
+			break;
 		case CHAR:
 			convertChar(str);
 			break;
@@ -48,6 +51,17 @@ void ScalarConverter::convert(const std::string &str)
 bool ScalarConverter::checkType(const std::string &str)
 {
 	_str = str;
+	int i = 0;
+
+	while (i < 6)
+	{
+		if (str == _pseudoLiterals[i])
+		{
+			_type = PSEUDO;
+			return false;
+		}
+		i++;
+	}
 	if (str.length() == 1 && !isdigit(str[0]))
 	{
 		_type = CHAR;
@@ -72,20 +86,20 @@ bool ScalarConverter::checkInt(const std::string &str)
             dot++;
             if (dot > 1)
             {
-                std::cout << "Error: invalid input" << std::endl;
-                return false;
+                std::cout << RED << "Error: invalid input" << RESET << std::endl;
+                return true;
             }
         }
         else if (!isdigit(str[i]) && !(str[i] == 'f' && i == (int)str.length() - 1))
         {
-            std::cout << "Error: invalid input" << std::endl;
-            return false;
+            std::cout << RED << "Error: invalid input" << RESET << std::endl;
+            return true;
         }
 			i++;
 	}
 	if (dot == 0 && str[str.length() - 1] == 'f')
 	{
-		std::cout << "Error: invalid input" << std::endl;
+		std::cout << RED << "Error: invalid input" << RESET << std::endl;
 		return true;
 	}	
 	else if (dot == 1)
@@ -149,45 +163,64 @@ void ScalarConverter::convertDouble(const std::string &str)
 	printDouble(d);
 }
 
+void ScalarConverter::printPseudo()
+{
+	std::cout << RED << "char: impossible" << RESET << std::endl;
+	std::cout << RED << "int: impossible" << RESET << std::endl;
+	if (_str == "nan" || _str == "nanf")
+		{
+			std::cout << BLUE << "float: nanf" << RESET << std::endl;
+			std::cout << MAGENTA << "double: nan" << RESET << std::endl;
+		}
+	else if (_str == "+inf" || _str == "+inff")
+		{
+			std::cout << BLUE << "float: inff" << RESET << std::endl;
+			std::cout << MAGENTA << "double: inf" << RESET << std::endl;
+		}
+	else if (_str == "-inf" || _str == "-inff")
+		{
+			std::cout << BLUE << "float: -inff" <<RESET <<  std::endl;
+			std::cout << MAGENTA << "double: -inf" <<RESET <<  std::endl;
+		}
+}
+
 void ScalarConverter::printChar(char c)
 {
 	if (atol(_str.c_str()) < -128 || atol(_str.c_str()) > 127)
 	{
-		std::cout << "char: impossible" << std::endl;
+		std::cout << RED << "char: impossible" << RESET << std::endl;
 		return;
 	}
-	std::cout << "char: ";
 	if (isprint(c))
-		std::cout << "'" << c << "'" << std::endl;
+		std::cout << GREEN << "char: '" << c << "'" << RESET << std::endl;
 	else
-		std::cout << "Non displayable" << std::endl;
+		std::cout << RED << "char: Non displayable" << RESET << std::endl;
 }
 
 void ScalarConverter::printInt(int i)
 {
-	std::cout << "int: ";
-	if (i >= INT_MIN && i <= INT_MAX)
-		std::cout << i << std::endl;
-	else
-		std::cout << "impossible" << std::endl;
+	if (i < INT_MIN || i > INT_MAX)
+	{
+		std::cout << RED << "int: impossible" << RESET << std::endl;
+		return;
+	}
+	std::cout << YELLOW << "int: " << i << RESET << std::endl;
 }
 
 void ScalarConverter::printFloat(float f)
 {
-	std::cout << "float: ";
 	if (f >= FLT_MIN && f <= FLT_MAX)
-		std::cout << std::fixed << std::setprecision(1) << f << "f" << std::endl;
+		std::cout << BLUE << "float: " << std::fixed << std::setprecision(1) << f << "f" << RESET << std::endl;
 	else
-		std::cout << "impossible" << std::endl;
+		std::cout << RED << "float: impossible" << RESET << std::endl;
 }
 
 void ScalarConverter::printDouble(double d)
 {
-	std::cout << "double: ";
 	if (d >= DBL_MIN && d <= DBL_MAX)
-		std::cout << std::fixed << std::setprecision(1) << d << std::endl;
+		std::cout << MAGENTA << "double: " << std::fixed << std::setprecision(1) << d << RESET << std::endl;
 	else
-		std::cout << "impossible" << std::endl;
+		std::cout << RED << "double: impossible" << RESET << std::endl;
 }
 int ScalarConverter::_type = PSEUDO;
 std::string ScalarConverter::_str = "";
