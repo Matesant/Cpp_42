@@ -187,11 +187,8 @@ void ScalarConverter::printPseudo()
 void ScalarConverter::printChar(char c)
 {
 	if (atol(_str.c_str()) < -128 || atol(_str.c_str()) > 127)
-	{
 		std::cout << RED << "char: impossible" << RESET << std::endl;
-		return;
-	}
-	if (isprint(c))
+	else if (isprint(c))
 		std::cout << GREEN << "char: '" << c << "'" << RESET << std::endl;
 	else
 		std::cout << RED << "char: Non displayable" << RESET << std::endl;
@@ -199,28 +196,26 @@ void ScalarConverter::printChar(char c)
 
 void ScalarConverter::printInt(int i)
 {
-	if (i < INT_MIN || i > INT_MAX)
-	{
+	if (atol(_str.c_str()) < INT_MIN || atol(_str.c_str()) > INT_MAX)
 		std::cout << RED << "int: impossible" << RESET << std::endl;
-		return;
-	}
-	std::cout << YELLOW << "int: " << i << RESET << std::endl;
+	else
+		std::cout << YELLOW << "int: " << i << RESET << std::endl;
 }
 
 void ScalarConverter::printFloat(float f)
 {
-	if (f >= FLT_MIN && f <= FLT_MAX)
-		std::cout << BLUE << "float: " << std::fixed << std::setprecision(1) << f << "f" << RESET << std::endl;
-	else
+	if (atol(_str.c_str()) < INT_MIN || atol(_str.c_str()) > INT_MAX)
 		std::cout << RED << "float: impossible" << RESET << std::endl;
+	else
+		std::cout << BLUE << "float: " << std::fixed << std::setprecision(1) << f << "f" << RESET << std::endl;
 }
 
 void ScalarConverter::printDouble(double d)
 {
-	if (d >= DBL_MIN && d <= DBL_MAX)
-		std::cout << MAGENTA << "double: " << std::fixed << std::setprecision(1) << d << RESET << std::endl;
-	else
+	if (atol(_str.c_str()) < INT_MIN || atol(_str.c_str()) > INT_MAX)
 		std::cout << RED << "double: impossible" << RESET << std::endl;
+	else
+		std::cout << MAGENTA << "double: " << std::fixed << std::setprecision(1) << d << RESET << std::endl;
 }
 int ScalarConverter::_type = PSEUDO;
 std::string ScalarConverter::_str = "";
