@@ -198,7 +198,7 @@ void ScalarConverter::printInt(int i)
 {
 	if (atol(_str.c_str()) < INT_MIN || atol(_str.c_str()) > INT_MAX)
 		std::cout << RED << "int: impossible" << RESET << std::endl;
-	else if ( i != atol(_str.c_str()))
+	else if ( i != atol(_str.c_str()) && _type != CHAR)
 		std::cout << RED << "int: impossible" << RESET << std::endl;
 	else
 		std::cout << YELLOW << "int: " << i << RESET << std::endl;
