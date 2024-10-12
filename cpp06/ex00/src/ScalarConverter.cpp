@@ -1,6 +1,6 @@
 #include "ScalarConverter.hpp"
 
-const std::string ScalarConverter::_pseudoLiterals[6] = {"nan", "+inf", "-inf", "nanf", "+inff", "-inff"};
+const std::string ScalarConverter::_pseudoLiterals[8] = {"nan", "+inf", "-inf", "nanf", "+inff", "-inff", "inf", "inff"};
 
 ScalarConverter::ScalarConverter()
 {
@@ -53,7 +53,7 @@ bool ScalarConverter::checkType(const std::string &str)
 	_str = str;
 	int i = 0;
 
-	while (i < 6)
+	while (i < 8)
 	{
 		if (str == _pseudoLiterals[i])
 		{
@@ -141,8 +141,8 @@ void ScalarConverter::convertFloat(const std::string &str)
 {
 	float f = atof(str.c_str());
 	char c = static_cast<char>(f);
-	int i = static_cast<int>(f);
 	double d = static_cast<double>(f);
+	int i = static_cast<int>(f);
 
 	printChar(c);
 	printInt(i);
@@ -172,7 +172,7 @@ void ScalarConverter::printPseudo()
 			std::cout << BLUE << "float: nanf" << RESET << std::endl;
 			std::cout << MAGENTA << "double: nan" << RESET << std::endl;
 		}
-	else if (_str == "+inf" || _str == "+inff")
+	else if (_str == "+inf" || _str == "+inff" || _str == "inf" || _str == "inff")
 		{
 			std::cout << BLUE << "float: inff" << RESET << std::endl;
 			std::cout << MAGENTA << "double: inf" << RESET << std::endl;
@@ -197,6 +197,8 @@ void ScalarConverter::printChar(char c)
 void ScalarConverter::printInt(int i)
 {
 	if (atol(_str.c_str()) < INT_MIN || atol(_str.c_str()) > INT_MAX)
+		std::cout << RED << "int: impossible" << RESET << std::endl;
+	else if ( i != atol(_str.c_str()))
 		std::cout << RED << "int: impossible" << RESET << std::endl;
 	else
 		std::cout << YELLOW << "int: " << i << RESET << std::endl;

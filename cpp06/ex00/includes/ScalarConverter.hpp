@@ -32,7 +32,7 @@ class ScalarConverter
 	static void printFloat(float f);
 	static void printDouble(double d);
 
-	static const std::string _pseudoLiterals[6];
+	static const std::string _pseudoLiterals[8];
 	static int _type;
 	static std::string _str;
 
