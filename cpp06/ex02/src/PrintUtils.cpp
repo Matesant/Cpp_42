@@ -7,6 +7,7 @@ void newLine(void)
 
 void printColor(const std::string& str) 
 {
+    std::cout << YELLOW << INVERSE << "------------------------------------------------------------" << RESET << std::endl;
     const int totalWidth = 60;
     int strLength = str.length();
     if (strLength >= totalWidth) {
@@ -15,13 +16,9 @@ void printColor(const std::string& str)
     }
 
     int hyphensEachSide = (totalWidth - strLength) / 2;
-    int extraHyphen = (totalWidth - strLength) % 2; // Para lidar com strings de comprimento ímpar
+    int extraHyphen = (totalWidth - strLength) % 2;
 
     std::string hyphens(hyphensEachSide, '-');
     std::cout << YELLOW << INVERSE << hyphens << str << hyphens << std::string(extraHyphen, '-') << RESET << std::endl;
-}
-
-void printHyphen(void)
-{
-	std::cout << YELLOW << INVERSE << "------------------------------------------------------------" << RESET << std::endl;
+    std::cout << YELLOW << INVERSE << "------------------------------------------------------------" << RESET << std::endl;
 }
