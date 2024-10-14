@@ -1,4 +1,4 @@
-#include "./Iter.hpp"
+#include "./iter.hpp"
 
 void	newLine(void);
 void	thatIsAllFolks();
@@ -22,7 +22,7 @@ int	main(void)
 	printHyphen();
 
 	newLine();
-	::Iter(iArray, 5, ::printColorOrange);
+	::iter(iArray, 5, ::printColorOrange);
 	newLine();
 
 	printHyphen();
@@ -30,7 +30,7 @@ int	main(void)
 	printHyphen();
 
 	newLine();
-	::Iter(iArray, 5, ::ifNumberisPrime);
+	::iter(iArray, 5, ::ifNumberisPrime);
 	newLine();
 
 	printHyphen();
@@ -38,7 +38,7 @@ int	main(void)
 	printHyphen();
 
 	newLine();
-	::Iter(fArray, 5, ::randonRound);
+	::iter(fArray, 5, ::randonRound);
 	newLine();
 
 	newLine();
@@ -46,7 +46,7 @@ int	main(void)
 	newLine();
 
 	newLine();
-	::Iter(cArray, 5, ::ifCharacterisOdd);
+	::iter(cArray, 5, ::ifCharacterisOdd);
 	newLine();
 
 	printHyphen();
