@@ -43,19 +43,107 @@ void	printHyphen(void)
 
 int	main(void)
 {
-	int array[] = {1, 2, 4, 5};
-	std::vector<int> vector(array, array + 5);
+	int array[] = {1, 2, 3, 4, 5, 10, 60, 300, 44, 63};
+    std::vector<int> vector(array, array + 10);
 
-	printHyphen();
-	printTag("Testing easyfind");
-	printHyphen();
+    newLine();
+    printHyphen();
+    printTag("Finding numbers in vector");
+    printHyphen();
+    newLine();
 
-	try {
-		printColor(*easyfind(vector, 3), GREEN);
-	} catch (std::exception& e) {
-		printColor(e.what(), RED);
-	}
-	newLine();
-	thatIsAllFolks();
-	return (0);
+    try {
+        printColor(*easyfind(vector, 3), GREEN);
+        printColor(*easyfind(vector, 5), GREEN);
+        printColor(*easyfind(vector, 10), GREEN);
+        printColor(*easyfind(vector, 60), GREEN);
+        printColor(*easyfind(vector, 300), GREEN);
+    } catch (std::exception& e) {
+        printColor(e.what(), RED);
+    }
+    newLine();
+
+    // Teste com std::list
+    std::list<int> lst(array, array + 10);
+    printHyphen();
+    printTag("Finding numbers in list");
+    printHyphen();
+    newLine();
+
+    try {
+        printColor(*easyfind(lst, 3), GREEN);
+        printColor(*easyfind(lst, 5), GREEN);
+        printColor(*easyfind(lst, 10), GREEN);
+        printColor(*easyfind(lst, 60), GREEN);
+        printColor(*easyfind(lst, 300), GREEN);
+    } catch (std::exception& e) {
+        printColor(e.what(), RED);
+    }
+    newLine();
+
+    // Teste com std::deque
+    std::deque<int> deq(array, array + 10);
+    printHyphen();
+    printTag("Finding numbers in deque");
+    printHyphen();
+    newLine();
+
+    try {
+        printColor(*easyfind(deq, 3), GREEN);
+        printColor(*easyfind(deq, 5), GREEN);
+        printColor(*easyfind(deq, 10), GREEN);
+        printColor(*easyfind(deq, 60), GREEN);
+        printColor(*easyfind(deq, 300), GREEN);
+    } catch (std::exception& e) {
+        printColor(e.what(), RED);
+    }
+    newLine();
+
+    // Teste com contêiner vazio
+    std::vector<int> emptyVector;
+    printHyphen();
+    printTag("Finding number in empty vector");
+    printHyphen();
+    newLine();
+
+    try {
+        printColor(*easyfind(emptyVector, 1), GREEN);
+    } catch (std::exception& e) {
+        printColor(e.what(), RED);
+    }
+    newLine();
+
+    // Teste com valores duplicados
+    int duplicateArray[] = {1, 2, 3, 3, 4, 5};
+    std::vector<int> duplicateVector(duplicateArray, duplicateArray + 6);
+    printHyphen();
+    printTag("Finding number in vector with duplicates");
+    printHyphen();
+    newLine();
+
+    try {
+        printColor(*easyfind(duplicateVector, 3), GREEN);
+    } catch (std::exception& e) {
+        printColor(e.what(), RED);
+    }
+    newLine();
+
+    // Teste com um único elemento
+    int singleElementArray[] = {42};
+    std::vector<int> singleElementVector(singleElementArray, singleElementArray + 1);
+    printHyphen();
+    printTag("Finding number in single element vector");
+    printHyphen();
+    newLine();
+
+    try {
+        printColor(*easyfind(singleElementVector, 42), GREEN);
+    } catch (std::exception& e) {
+        printColor(e.what(), RED);
+    }
+    newLine();
+
+    printHyphen();
+    thatIsAllFolks();
+    return 0;
 }

@@ -24,6 +24,8 @@
 # include <unistd.h>
 # include <vector>
 # include <algorithm>
+# include <deque>
+# include <list>
 
 template <typename T> 
 std::string toString(const T &value);
