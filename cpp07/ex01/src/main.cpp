@@ -40,17 +40,6 @@ void ifNumberisPrime(const int& n)
 	::printColor("Prime", GREEN);
 }
 
-#include <unistd.h> // Para usleep
-
-#include <iostream>
-#include <unistd.h> // Para usleep
-
-#include <iostream>
-#include <unistd.h> // Para usleep
-
-#include <iostream>
-#include <unistd.h> // Para usleep
-
 #include <iostream>
 #include <unistd.h> // Para usleep
 
