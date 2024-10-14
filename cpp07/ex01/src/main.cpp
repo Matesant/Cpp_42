@@ -1,5 +1,60 @@
 #include "./Iter.hpp"
 
+void	newLine(void);
+void	thatIsAllFolks();
+void	printHyphen(void);
+double	round(double x);
+void	pause(int milliseconds);
+void	randonRound(const float& f);
+void	ifNumberisPrime(const int& n);
+void	ifCharacterisOdd(const char& c);
+void	printTag(const std::string& str);
+
+
+int	main(void)
+{
+	char cArray[] = {'a', 'b', 'c', 'd'};
+	int iArray[] = {1, 2, 3, 4, 5};
+	float fArray[] = {1.1f, 2.2f, 3.3f, 4.4f, 5.5f};
+
+	printHyphen();
+	printTag("Int Array");
+	printHyphen();
+
+	newLine();
+	::Iter(iArray, 5, ::printColorOrange);
+	newLine();
+
+	printHyphen();
+	printTag("Testing ifNumberisPrime with Iterator");
+	printHyphen();
+
+	newLine();
+	::Iter(iArray, 5, ::ifNumberisPrime);
+	newLine();
+
+	printHyphen();
+	printTag("Testing randonRound with Iterator");
+	printHyphen();
+
+	newLine();
+	::Iter(fArray, 5, ::randonRound);
+	newLine();
+
+	newLine();
+	printTag("Testing ifCharacterisOdd with Iterator");
+	newLine();
+
+	newLine();
+	::Iter(cArray, 5, ::ifCharacterisOdd);
+	newLine();
+
+	printHyphen();
+	thatIsAllFolks();
+
+	return (0);
+}
+
 void	newLine(void)
 {
 	std::cout << std::endl;
@@ -40,20 +95,23 @@ void ifNumberisPrime(const int& n)
 	::printColor("Prime", GREEN);
 }
 
-#include <iostream>
-#include <unistd.h> // Para usleep
+void pause(int milliseconds)
+{
+    clock_t end_time = clock() + milliseconds * CLOCKS_PER_SEC / 1000;
+    while (clock() < end_time);
+}
 
 void thatIsAllFolks()
 {
     const char* message = "That's all folks!";
-    const int delay = 100000;
+    const int delay = 100;
     const char* colors[] = {YELLOW, GREEN, CYAN, MAGENTA, BLUE, RED};
     const int numColors = sizeof(colors) / sizeof(colors[0]);
     for (int i = 0; message[i] != '\0'; ++i)
     {
         std::cout << colors[i % numColors] << message[i] << RESET;
         std::cout.flush();
-        usleep(delay);
+        pause(delay);
     }
     std::cout << std::endl;
 }
@@ -79,38 +137,3 @@ void	printHyphen(void)
 	std::cout << YELLOW << INVERSE << "------------------------------------------------------------" << RESET << std::endl;
 }
 
-int	main(void)
-{
-	char cArray[] = {'a', 'b', 'c', 'd'};
-	int iArray[] = {1, 2, 3, 4, 5};
-	float fArray[] = {1.1f, 2.2f, 3.3f, 4.4f, 5.5f};
-
-	printHyphen();
-	printTag("Int Array");
-	printHyphen();
-
-	newLine();
-	::Iter(iArray, 5, ::printColorOrange);
-	newLine();
-
-	printHyphen();
-	printTag("Testing ifNumberisPrime with Iterator");
-	printHyphen();
-
-	newLine();
-	::Iter(cArray, 5, ::ifCharacterisOdd);
-	newLine();
-
-	printHyphen();
-	printTag("Testing randonRound with Iterator");
-	printHyphen();
-
-	newLine();
-	::Iter(fArray, 5, ::randonRound);
-	newLine();
-
-	printHyphen();
-	thatIsAllFolks();
-
-	return (0);
-}

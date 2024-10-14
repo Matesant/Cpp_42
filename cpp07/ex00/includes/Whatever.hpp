@@ -57,5 +57,4 @@ void printColor(const T& value, const std::string& color)
     std::cout << color << toString(value) << RESET << std::endl;
 }
 
-
 #endif

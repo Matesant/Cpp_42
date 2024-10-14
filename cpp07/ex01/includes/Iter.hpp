@@ -20,6 +20,7 @@
 # include <string>
 # include <sstream>
 # include <cmath>
+# include <ctime>
 
 template <typename T>
 void Iter(T* array, size_t length, void (*func)(T const &))

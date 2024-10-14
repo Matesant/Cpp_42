@@ -16,12 +16,11 @@
 # define RESET "\033[0m"
 # define INVERSE "\033[7m"
 
-# include <iostream>
+# include <cmath>
 # include <string>
 # include <sstream>
-# include <cmath>
+# include <iostream>
 # include <stdexcept>
-#include <unistd.h>
 
 template <typename T>
 std::string toString(const T& value);

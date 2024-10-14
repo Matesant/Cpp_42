@@ -1,45 +1,10 @@
 #include "./Array.hpp"
 
-void	newLine(void)
-{
-	std::cout << std::endl;
-}
-
-void thatIsAllFolks()
-{
-    const char* message = "That's all folks!";
-    const int delay = 100000;
-    const char* colors[] = {YELLOW, GREEN, CYAN, MAGENTA, BLUE, RED};
-    const int numColors = sizeof(colors) / sizeof(colors[0]);
-    for (int i = 0; message[i] != '\0'; ++i)
-    {
-        std::cout << colors[i % numColors] << message[i] << RESET;
-        std::cout.flush();
-        usleep(delay);
-    }
-    std::cout << std::endl;
-}
-
-void printTag(const std::string& str) 
-{
-    const int totalWidth = 60;
-    int strLength = str.length();
-    if (strLength >= totalWidth) {
-        std::cout << str << std::endl;
-        return;
-    }
-
-    int hyphensEachSide = (totalWidth - strLength) / 2;
-    int extraHyphen = (totalWidth - strLength) % 2;
-
-    std::string hyphens(hyphensEachSide, '-');
-    std::cout << YELLOW << INVERSE << hyphens << str << hyphens << std::string(extraHyphen, '-') << RESET << std::endl;
-}
-
-void	printHyphen(void)
-{
-	std::cout << YELLOW << INVERSE << "------------------------------------------------------------" << RESET << std::endl;
-}
+void	pause(int milliseconds);
+void	newLine(void);
+void	printTag(const std::string& str) ;
+void	printHyphen(void);
+void	thatIsAllFolks();
 
 int	main(void)
 {
@@ -122,9 +87,74 @@ int	main(void)
 		::printColor(e.what(), RED);
 	}
 	newLine();
+
+	::Array<std::string> strArray(3);
+    strArray[0] = "Hello";
+    strArray[1] = "World";
+    strArray[2] = "!";
+    
+    ::printHyphen();
+    ::printTag("Printing strArray");
+    ::printHyphen();
+    newLine();
+
+    for (unsigned int i = 0; i < strArray.size(); i++)
+    {
+        ::printColor("strArray[" + ::toString(i) + "] = " + strArray[i], CYAN);
+    }
+	
+	newLine();
 	::printHyphen();
 
 	newLine();
 	thatIsAllFolks();
 	return (0);
 }
+
+void	newLine(void)
+{
+	std::cout << std::endl;
+}
+
+void pause(int milliseconds)
+{
+    clock_t end_time = clock() + milliseconds * CLOCKS_PER_SEC / 1000;
+    while (clock() < end_time);
+}
+
+void thatIsAllFolks()
+{
+    const char* message = "That's all folks!";
+    const int delay = 100;
+    const char* colors[] = {YELLOW, GREEN, CYAN, MAGENTA, BLUE, RED};
+    const int numColors = sizeof(colors) / sizeof(colors[0]);
+    for (int i = 0; message[i] != '\0'; ++i)
+    {
+        std::cout << colors[i % numColors] << message[i] << RESET;
+        std::cout.flush();
+        pause(delay);
+    }
+    std::cout << std::endl;
+}
+
+void printTag(const std::string& str) 
+{
+    const int totalWidth = 60;
+    int strLength = str.length();
+    if (strLength >= totalWidth) {
+        std::cout << str << std::endl;
+        return;
+    }
+
+    int hyphensEachSide = (totalWidth - strLength) / 2;
+    int extraHyphen = (totalWidth - strLength) % 2;
+
+    std::string hyphens(hyphensEachSide, '-');
+    std::cout << YELLOW << INVERSE << hyphens << str << hyphens << std::string(extraHyphen, '-') << RESET << std::endl;
+}
+
+void	printHyphen(void)
+{
+	std::cout << YELLOW << INVERSE << "------------------------------------------------------------" << RESET << std::endl;
+}
+
