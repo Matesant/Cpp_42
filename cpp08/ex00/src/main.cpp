@@ -1,45 +1,11 @@
 #include "easyfind.hpp"
 
-void	newLine(void)
-{
-	std::cout << std::endl;
-}
 
-void thatIsAllFolks()
-{
-    const char* message = "That's all folks!";
-    const int delay = 100000;
-    const char* colors[] = {YELLOW, GREEN, CYAN, MAGENTA, BLUE, RED};
-    const int numColors = sizeof(colors) / sizeof(colors[0]);
-    for (int i = 0; message[i] != '\0'; ++i)
-    {
-        std::cout << colors[i % numColors] << message[i] << RESET;
-        std::cout.flush();
-        usleep(delay);
-    }
-    std::cout << std::endl;
-}
+void    newLine(void);
+void    thatIsAllFolks();
+void    pause(int milliseconds);
+void    printTag(const std::string& str);
 
-void printTag(const std::string& str) 
-{
-    const int totalWidth = 60;
-    int strLength = str.length();
-    if (strLength >= totalWidth) {
-        std::cout << str << std::endl;
-        return;
-    }
-
-    int hyphensEachSide = (totalWidth - strLength) / 2;
-    int extraHyphen = (totalWidth - strLength) % 2;
-
-    std::string hyphens(hyphensEachSide, '-');
-    std::cout << YELLOW << INVERSE << hyphens << str << hyphens << std::string(extraHyphen, '-') << RESET << std::endl;
-}
-
-void	printHyphen(void)
-{
-	std::cout << YELLOW << INVERSE << "------------------------------------------------------------" << RESET << std::endl;
-}
 
 int	main(void)
 {
@@ -47,9 +13,7 @@ int	main(void)
     std::vector<int> vector(array, array + 10);
 
     newLine();
-    printHyphen();
     printTag("Finding numbers in vector");
-    printHyphen();
     newLine();
 
     try {
@@ -65,9 +29,7 @@ int	main(void)
 
     // Teste com std::list
     std::list<int> lst(array, array + 10);
-    printHyphen();
     printTag("Finding numbers in list");
-    printHyphen();
     newLine();
 
     try {
@@ -83,9 +45,7 @@ int	main(void)
 
     // Teste com std::deque
     std::deque<int> deq(array, array + 10);
-    printHyphen();
     printTag("Finding numbers in deque");
-    printHyphen();
     newLine();
 
     try {
@@ -101,9 +61,7 @@ int	main(void)
 
     // Teste com contêiner vazio
     std::vector<int> emptyVector;
-    printHyphen();
     printTag("Finding number in empty vector");
-    printHyphen();
     newLine();
 
     try {
@@ -116,9 +74,7 @@ int	main(void)
     // Teste com valores duplicados
     int duplicateArray[] = {1, 2, 3, 3, 4, 5};
     std::vector<int> duplicateVector(duplicateArray, duplicateArray + 6);
-    printHyphen();
     printTag("Finding number in vector with duplicates");
-    printHyphen();
     newLine();
 
     try {
@@ -131,9 +87,7 @@ int	main(void)
     // Teste com um único elemento
     int singleElementArray[] = {42};
     std::vector<int> singleElementVector(singleElementArray, singleElementArray + 1);
-    printHyphen();
     printTag("Finding number in single element vector");
-    printHyphen();
     newLine();
 
     try {
@@ -143,7 +97,52 @@ int	main(void)
     }
     newLine();
 
-    printHyphen();
     thatIsAllFolks();
     return 0;
 }
+
+void	newLine(void)
+{
+	std::cout << std::endl;
+}
+
+void pause(int milliseconds)
+{
+    clock_t end_time = clock() + milliseconds * CLOCKS_PER_SEC / 1000;
+    while (clock() < end_time);
+}
+
+void thatIsAllFolks()
+{
+    const char* message = "That's all folks!";
+    const int delay = 100;
+    const char* colors[] = {YELLOW, GREEN, CYAN, MAGENTA, BLUE, RED};
+    const int numColors = sizeof(colors) / sizeof(colors[0]);
+    for (int i = 0; message[i] != '\0'; ++i)
+    {
+        std::cout << colors[i % numColors] << message[i] << RESET;
+        std::cout.flush();
+        pause(delay);
+    }
+    std::cout << std::endl;
+}
+
+void printTag(const std::string& str) 
+{
+    const int totalWidth = 60;
+    int strLength = str.length();
+    if (strLength >= totalWidth) {
+        std::cout << str << std::endl;
+        return;
+    }
+
+	std::cout << YELLOW << INVERSE << "------------------------------------------------------------" << RESET << std::endl;
+    int hyphensEachSide = (totalWidth - strLength) / 2;
+    int extraHyphen = (totalWidth - strLength) % 2;
+
+    std::string hyphens(hyphensEachSide, '-');
+    std::cout << YELLOW << INVERSE << hyphens << str << hyphens << std::string(extraHyphen, '-') << RESET << std::endl;
+	std::cout << YELLOW << INVERSE << "------------------------------------------------------------" << RESET << std::endl;
+}
+
+

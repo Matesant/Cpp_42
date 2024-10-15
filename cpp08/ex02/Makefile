@@ -17,8 +17,8 @@ CFLAGS	=	-Wall -Werror -Wextra -std=c++98  -g3 -O0 -I./includes
 RM		=	rm -rf
 
 # Dir and file names
-NAME	=	Span
-SRCS	=	./src/main.cpp ./src/Span.cpp
+NAME	=	Mutant
+SRCS	=	./src/main.cpp
 BIN_DIR =	./bin
 OBJS	=	$(addprefix $(BIN_DIR)/, $(notdir $(SRCS:.cpp=.o)))
 INC		=	$(wildcard /includes/*.hpp)

@@ -26,14 +26,14 @@ Span::~Span()
 void Span::addNumber(int number)
 {
 	if (_v.size() >= _n)
-		throw SpanException();
+		throw fullSpanException();
 	_v.push_back(number);
 }
 
 void Span::addNumbers(std::vector<int>::iterator begin, std::vector<int>::iterator end)
 {
 	if (_v.size() + std::distance(begin, end) > _n)
-		throw SpanException();
+		throw fullSpanException();
 	_v.insert(_v.end(), begin, end);
 }
 
@@ -43,7 +43,7 @@ int Span::shortestSpan(void)
 		throw notEnoughNumbersException();
 	std::vector<int> v = _v;
 	std::sort(v.begin(), v.end());
-	int min = INT_MAX;
+	int min = MAX_INT;
 	for (size_t i = 1; i < v.size(); i++)
 	{
 		if (v[i] - v[i - 1] < min)
@@ -79,4 +79,9 @@ const char *Span::noSpanException::what() const throw()
 const char *Span::notEnoughNumbersException::what() const throw()
 {
 	return "There are not enough numbers to calculate the span";
+}
+
+std:: vector<int> Span::getNumbers(void)
+{
+	return _v;
 }
