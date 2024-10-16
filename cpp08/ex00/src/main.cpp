@@ -27,7 +27,6 @@ int	main(void)
     }
     newLine();
 
-    // Teste com std::list
     std::list<int> lst(array, array + 10);
     printTag("Finding numbers in list");
     newLine();
@@ -43,7 +42,6 @@ int	main(void)
     }
     newLine();
 
-    // Teste com std::deque
     std::deque<int> deq(array, array + 10);
     printTag("Finding numbers in deque");
     newLine();
@@ -59,7 +57,6 @@ int	main(void)
     }
     newLine();
 
-    // Teste com contêiner vazio
     std::vector<int> emptyVector;
     printTag("Finding number in empty vector");
     newLine();
@@ -71,7 +68,6 @@ int	main(void)
     }
     newLine();
 
-    // Teste com valores duplicados
     int duplicateArray[] = {1, 2, 3, 3, 4, 5};
     std::vector<int> duplicateVector(duplicateArray, duplicateArray + 6);
     printTag("Finding number in vector with duplicates");
@@ -84,7 +80,6 @@ int	main(void)
     }
     newLine();
 
-    // Teste com um único elemento
     int singleElementArray[] = {42};
     std::vector<int> singleElementVector(singleElementArray, singleElementArray + 1);
     printTag("Finding number in single element vector");

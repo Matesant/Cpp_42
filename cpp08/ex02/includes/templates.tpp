@@ -39,4 +39,10 @@ void printColor(T value, const std::string &color)
 	std::cout << color << toString(value) << RESET << std::endl;
 }
 
+template <typename T>
+void printColorNoNewLine(T value, const std::string &color)
+{
+	std::cout << color << toString(value) << RESET << " ";
+}
+
 #endif

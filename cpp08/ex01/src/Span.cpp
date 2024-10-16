@@ -30,10 +30,10 @@ void Span::addNumber(int number)
 	_v.push_back(number);
 }
 
-void Span::addNumbers(std::vector<int>::iterator begin, std::vector<int>::iterator end)
+void Span::addNumbersAndFill(std::vector<int>::iterator begin, std::vector<int>::iterator end)
 {
 	if (_v.size() + std::distance(begin, end) > _n)
-		throw fullSpanException();
+		throw tooManyNumberSpanException();
 	_v.insert(_v.end(), begin, end);
 }
 

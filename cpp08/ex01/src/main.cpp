@@ -1,8 +1,9 @@
 #include "Span.hpp"
 
-void        newLine(void);
-void        thatIsAllFolks();
-void        printTag(const std::string& str);
+void                newLine(void);
+void                thatIsAllFolks();
+std::vector<int>    createAndFillVector(int i) ;
+void                printTag(const std::string& str);
 
 int	main(void)
 {
@@ -58,44 +59,65 @@ int	main(void)
     printTag("Adding numbers to span using addNumbers");
     newLine();
 
-    std::vector<int> v;
-    v.push_back(6);
-    v.push_back(7);
-    v.push_back(8);
-    v.push_back(9);
-    v.push_back(10);
-    
-    try {
-        span.addNumbers(v.begin(), v.end());
-    } catch (std::exception& e) {
+    Span span4(21000);
+    std::vector<int> v = createAndFillVector(21000);
+
+    try
+    {
+        span4.addNumbersAndFill(v.begin(), v.end());
+        printColor(toString("Size : " + toString(span4.getNumbers().size())), GREEN);
+
+    }
+    catch (std::exception& e)
+    {
         printColor(e.what(), RED);
     }
 
     newLine();
+    printTag("Shortest and longest span with more than 10000 elements");
+
+    newLine();
+    printColor("Shortest : " + toString(span4.shortestSpan()), GREEN);
+
+    newLine();
+    printColor("Longest : " + toString(span4.longestSpan()), GREEN);
+
+    newLine();
     printTag("Short and long in span with more than 10000 elements");
 
-    Span span3(10000);
+    Span span3(11000);
     std::srand(time(NULL)); // use current time as seed for random generator
-    for (int i = 0; i < 10000; ++i) {
-        span3.addNumber(std::rand() % 10000); // Limiting the random number to a range for better readability
+    for (int i = 0; i < 11000; ++i) {
+        span3.addNumber(std::rand() % 11000); // Limiting the random number to a range for better readability
     }
 
     newLine();
-    printTag("Shortest span");
-
-    newLine();
     printColor(toString("Shortest : " + toString(span3.shortestSpan())), GREEN);
-    newLine();
-
-    printTag("Longest span");
 
     newLine();
     printColor(toString("Longest : " + toString(span3.longestSpan())), GREEN);
     newLine();
 
     newLine();
+    printTag("size of span3");
+    newLine();
+
+    printColor(toString("Size : " + toString(span3.getNumbers().size())), GREEN);
+
+
+    newLine();
 	thatIsAllFolks();
     return 0;
+}
+
+std::vector<int> createAndFillVector(int i) 
+{
+	std::vector<int> v;
+	std::srand(time(0));
+	for (int j = 0; j < i; ++j) {
+		v.push_back(std::rand() % i);
+	}
+	return v;
 }
 
 void	newLine(void)
