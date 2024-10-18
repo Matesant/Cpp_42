@@ -6,9 +6,9 @@ void    thatIsAllFolks();
 void    pause(int milliseconds);
 void    printTag(const std::string& str);
 
-
 int	main(int argc, char **argv)
 {  
+    (void)argv;
     if (argc != 2)
     {
         std::cerr << "Usage: ./bitcoinExchange <filename>" << std::endl;
@@ -16,12 +16,19 @@ int	main(int argc, char **argv)
     }
     else
     {
-        printTag("Bitcoin Exchange");
-        BitcoinExchange exchange(argv[1]);
-        exchange.run();
+        try
+        {
+            BitcoinExchange exchange;
+            exchange._processFile(argv[1]);
+        }
+        catch (const std::exception &e)
+        {
+            std::cerr << e.what() << std::endl;
+            return 1;
+        }
     }
 	
-    thatIsAllFolks();
+    //thatIsAllFolks();
     return 0;
 }
 

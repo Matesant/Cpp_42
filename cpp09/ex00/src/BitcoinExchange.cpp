@@ -2,6 +2,7 @@
 
 BitcoinExchange::BitcoinExchange()
 {
+	_saveDatabase();
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &other)
@@ -19,29 +20,171 @@ BitcoinExchange::~BitcoinExchange()
 {
 }
 
-BitcoinExchange::BitcoinExchange(const std::string &filename)
+void BitcoinExchange::_saveDatabase(void)
 {
-	std::ifstream file = validadeFile(filename);
-	readFile(filename);
-}
+	std::ifstream file("data.csv");
 
-std::ifstream BitcoinExchange::validadeFile(const std::string &filename)
-{
-	std::ifstream file(filename);
-
-	if (!file.is_open())
+	if (file.is_open())
+	{
+		std::string line;
+		std::getline(file, line);
+		while (std::getline(file, line))
+		{
+			std::string date;
+			std::string value;
+			std::string::size_type pos = line.find(',');
+			if (pos != std::string::npos)
+			{
+				if (pos + 1 < line.size())
+				{
+					date = line.substr(0, pos);
+					value = line.substr(pos + 1);
+					_validateLineData(line);
+					_database[date] = std::atof(value.c_str());
+				}
+			}
+		}
+		file.close();
+	}
+	else
+	{
 		throw InvalidFile();
-	return (file);
+	}
 }
 
-void BitcoinExchange::validateLine(const std::string &line)
+void BitcoinExchange::_processFile(const std::string &filename)
 {
+	std::ifstream file(filename.c_str());
+
+	if (file.is_open())
+	{
+		std::string line;
+		std::getline(file, line);
+		_validateLine(line);
+		while (std::getline(file, line))
+		{
+			std::string date;
+			std::string value;
+			std::string::size_type pos = line.find('|');
+			if (pos != std::string::npos)
+			{
+				if (pos + 1 < line.size())
+				{
+					_validateLine(line);
+					date = line.substr(0, pos);
+					value = line.substr(pos + 1);
+					_writeLine(date, std::atof(value.c_str()));
+				}
+			}	
+		}
+		file.close();
+	}
+	else
+	{
+		throw InvalidFile();
+	}
 }
 
-void BitcoinExchange::validateValue(const std::string &line)
+void BitcoinExchange::_writeLine(const std::string &date, double value)
 {
+	std::ofstream file("data.csv", std::ios::app);
+
+	if (file.is_open())
+	{
+		file << date << "," << value << std::endl;
+		file.close();
+	}
+	else
+	{
+		throw InvalidFile();
+	}
 }
 
-void BitcoinExchange::validateDate(const std::string &line)
+void BitcoinExchange::_validateLine(const std::string &line)
 {
+	std::string::size_type pos = line.find('|');
+	if (pos == std::string::npos)
+	{
+		throw InvalidFile();
+	}
+	std::string date = line.substr(0, pos);
+	std::string value = line.substr(pos + 1);
+	if (date == "date" || value == "value")
+		return;
+	if (date.size() != 10)
+	{
+		throw InvalidFile();
+	}
+	if (value.size() == 0)
+	{
+		throw InvalidFile();
+	}
+	for (size_t i = 0; i < date.size(); i++)
+	{
+		if (i == 4 || i == 7)
+		{
+			if (date[i] != '-')
+			{
+				throw InvalidFile();
+			}
+		}
+		else
+		{
+			if (!std::isdigit(date[i]))
+			{
+				throw InvalidFile();
+			}
+		}
+	}
+	for (size_t i = 0; i < value.size(); i++)
+	{
+		if (!std::isdigit(value[i]) && value[i] != '.')
+		{
+			throw InvalidFile();
+		}
+	}
 }
+
+void BitcoinExchange::_validateLineData(const std::string &line)
+{
+	std::string::size_type pos = line.find(',');
+	if (pos == std::string::npos)
+	{
+		throw InvalidFile();
+	}
+	std::string date = line.substr(0, pos);
+	std::string value = line.substr(pos + 1);
+	if (date.size() != 10)
+	{
+		throw InvalidFile();
+	}
+	if (value.size() == 0)
+	{
+		throw InvalidFile();
+	}
+	for (size_t i = 0; i < date.size(); i++)
+	{
+		if (i == 4 || i == 7)
+		{
+			if (date[i] != '-')
+			{
+				throw InvalidFile();
+			}
+		}
+		else
+		{
+			if (!std::isdigit(date[i]))
+			{
+				throw InvalidFile();
+			}
+		}
+	}
+	for (size_t i = 0; i < value.size(); i++)
+	{
+		if (!std::isdigit(value[i]) && value[i] != '.')
+		{
+			throw InvalidFile();
+		}
+	}
+}
+

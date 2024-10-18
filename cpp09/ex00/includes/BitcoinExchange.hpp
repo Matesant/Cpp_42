@@ -16,48 +16,48 @@
 # define RESET "\033[0m"
 # define INVERSE "\033[7m"
 
+# include <algorithm>
 # include <cmath>
+# include <fstream>
 # include <iostream>
+# include <map>
 # include <sstream>
 # include <stdexcept>
 # include <string>
-# include <unistd.h>
-# include <algorithm>
-# include <fstream>
-# include <map>
 
-template <typename T> 
-std::string toString(const T &value);
+template <typename T> std::string toString(const T &value);
 
-template <typename T> 
-void printColor(const T &value, const std::string &color);
+template <typename T> void printColor(const T &value, const std::string &color);
 
 class BitcoinExchange
 {
-	private:
-		BitcoinExchange();
-		BitcoinExchange(const BitcoinExchange &other);
-		BitcoinExchange &operator=(const BitcoinExchange &other);
-		~BitcoinExchange();
+  private:
+	BitcoinExchange(const BitcoinExchange &other);
+	BitcoinExchange &operator=(const BitcoinExchange &other);
 
-		std::ifstream validadeFile(const std::string &filename);
-		void	readFile(const std::string &filename);
-		void	validateLine(const std::string &line);
-		void	validateValue(const std::string &line);
-		void	validateDate(const std::string &line);
+	std::map<std::string, double> _database;
 
-		class InvalidFile : public std::exception
+	void _saveDatabase(void);
+	void _validateLineData(const std::string &line);
+	void _validateLine(const std::string &line);
+	void _writeLine(const std::string &date, double value);
+	// void			validateValue(const std::string &line);
+	// void			validateDate(const std::string &line);
+
+  public:
+	BitcoinExchange(void);
+	~BitcoinExchange(void);
+
+	void _processFile(const std::string &filename);
+	
+	class InvalidFile : public std::exception
+	{
+		public:
+		virtual const char *what() const throw()
 		{
-			public:
-				virtual const char *what() const throw()
-				{
-					return ("Invalid file");
-				}
-		};
-
-	public:
-		BitcoinExchange(const std::string &filename);
-		
+			return ("Invalid file");
+		}
+	};
 };
 
 template <typename T> std::string toString(const T &value)
