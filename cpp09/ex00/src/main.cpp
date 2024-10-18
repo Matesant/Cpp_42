@@ -28,7 +28,7 @@ int	main(int argc, char **argv)
         }
     }
 	
-    //thatIsAllFolks();
+    thatIsAllFolks();
     return 0;
 }
 

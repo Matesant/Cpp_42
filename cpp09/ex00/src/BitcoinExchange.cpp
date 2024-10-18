@@ -48,7 +48,8 @@ void BitcoinExchange::_saveDatabase(void)
 	}
 	else
 	{
-		throw InvalidFile();
+		printColor("Invalid file", RED);
+		return ;
 	}
 }
 
@@ -81,7 +82,8 @@ void BitcoinExchange::_processFile(const std::string &filename)
 	}
 	else
 	{
-		throw InvalidFile();
+		printColor("Invalid file", RED);
+		return ;
 	}
 }
 
@@ -109,7 +111,7 @@ void BitcoinExchange::_validateLine(const std::string &line)
 	}
 	std::string date = line.substr(0, pos);
 	std::string value = line.substr(pos + 1);
-	if (date == "date" || value == "value")
+	if (date.find("date") != std::string::npos || value.find("value") != std::string::npos)
 		return;
 	if (date.size() != 10)
 	{
@@ -125,14 +127,14 @@ void BitcoinExchange::_validateLine(const std::string &line)
 		{
 			if (date[i] != '-')
 			{
-				throw InvalidFile();
+				printColor("jorge", RED);
 			}
 		}
 		else
 		{
 			if (!std::isdigit(date[i]))
 			{
-				throw InvalidFile();
+				printColor("tobias", RED);
 			}
 		}
 	}
@@ -140,7 +142,7 @@ void BitcoinExchange::_validateLine(const std::string &line)
 	{
 		if (!std::isdigit(value[i]) && value[i] != '.')
 		{
-			throw InvalidFile();
+			printColor("sabrina", YELLOW);
 		}
 	}
 }
