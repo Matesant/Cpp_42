@@ -1,5 +1,5 @@
-#ifndef EASYFIND_HPP
-# define EASYFIND_HPP
+#ifndef RPN_HPP
+# define RPN_HPP
 
 # define ORANGE "\033[38;5;208m"
 # define PINK "\033[38;5;213m"
@@ -16,31 +16,39 @@
 # define RESET "\033[0m"
 # define INVERSE "\033[7m"
 
+# include <algorithm>
 # include <cmath>
+# include <cstdio>
+# include <fstream>
 # include <iostream>
 # include <sstream>
-# include <stdexcept>
+# include <stack>
 # include <string>
-# include <unistd.h>
-# include <vector>
-# include <algorithm>
-# include <deque>
-# include <list>
 
-template <typename T> 
-std::string toString(const T &value);
+template <typename T> std::string toString(const T &value);
 
-template <typename T> 
-void printColor(const T &value, const std::string &color);
+template <typename T> void printColor(const T &value, const std::string &color);
 
-template <typename T> 
-typename T::iterator easyfind(T &container, int value)
+class RPN
 {
-	typename T::iterator it = std::find(container.begin(), container.end(),value);
-	if (it == container.end())
-		throw std::runtime_error("Value not found");
-	return (it);
-}
+  private:
+	RPN(const RPN &other);
+	RPN &operator=(const RPN &other);
+
+	// RPN methods
+	bool _isOperator(const std::string &token);
+	double _applyTheMathematics(double operand1, double operand2,
+		const std::string &token);
+
+	// input validation methods
+	bool _validExpression(const std::string &expression);
+
+  public:
+	RPN(void);
+	~RPN(void);
+
+	void calculate(const std::string &expression);
+};
 
 template <typename T> std::string toString(const T &value)
 {

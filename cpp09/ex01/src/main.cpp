@@ -1,97 +1,22 @@
-#include "easyfind.hpp"
+#include "RPN.hpp"
 
 
 void    newLine(void);
 void    thatIsAllFolks();
 void    pause(int milliseconds);
-void    printTag(const std::string& str);
 
+int	main(int argc, char **argv)
+{  
+    RPN rpn;
 
-int	main(void)
-{
-	int array[] = {1, 2, 3, 4, 5, 10, 60, 300, 44, 63};
-    std::vector<int> vector(array, array + 10);
+	if (argc != 2)
+	{
+		std::cerr << "Usage: ./rpn \"expression\"" << std::endl;
+		return 1;
+	}
 
-    newLine();
-    printTag("Finding numbers in vector");
-    newLine();
-
-    try {
-        printColor(*easyfind(vector, 3), GREEN);
-        printColor(*easyfind(vector, 5), GREEN);
-        printColor(*easyfind(vector, 10), GREEN);
-        printColor(*easyfind(vector, 60), GREEN);
-        printColor(*easyfind(vector, 300), GREEN);
-    } catch (std::exception& e) {
-        printColor(e.what(), RED);
-    }
-    newLine();
-
-    std::list<int> lst(array, array + 10);
-    printTag("Finding numbers in list");
-    newLine();
-
-    try {
-        printColor(*easyfind(lst, 3), GREEN);
-        printColor(*easyfind(lst, 5), GREEN);
-        printColor(*easyfind(lst, 10), GREEN);
-        printColor(*easyfind(lst, 60), GREEN);
-        printColor(*easyfind(lst, 300), GREEN);
-    } catch (std::exception& e) {
-        printColor(e.what(), RED);
-    }
-    newLine();
-
-    std::deque<int> deq(array, array + 10);
-    printTag("Finding numbers in deque");
-    newLine();
-
-    try {
-        printColor(*easyfind(deq, 3), GREEN);
-        printColor(*easyfind(deq, 5), GREEN);
-        printColor(*easyfind(deq, 10), GREEN);
-        printColor(*easyfind(deq, 60), GREEN);
-        printColor(*easyfind(deq, 300), GREEN);
-    } catch (std::exception& e) {
-        printColor(e.what(), RED);
-    }
-    newLine();
-
-    std::vector<int> emptyVector;
-    printTag("Finding number in empty vector");
-    newLine();
-
-    try {
-        printColor(*easyfind(emptyVector, 1), GREEN);
-    } catch (std::exception& e) {
-        printColor(e.what(), RED);
-    }
-    newLine();
-
-    int duplicateArray[] = {1, 2, 3, 3, 4, 5};
-    std::vector<int> duplicateVector(duplicateArray, duplicateArray + 6);
-    printTag("Finding number in vector with duplicates");
-    newLine();
-
-    try {
-        printColor(*easyfind(duplicateVector, 3), GREEN);
-    } catch (std::exception& e) {
-        printColor(e.what(), RED);
-    }
-    newLine();
-
-    int singleElementArray[] = {42};
-    std::vector<int> singleElementVector(singleElementArray, singleElementArray + 1);
-    printTag("Finding number in single element vector");
-    newLine();
-
-    try {
-        printColor(*easyfind(singleElementVector, 42), GREEN);
-    } catch (std::exception& e) {
-        printColor(e.what(), RED);
-    }
-    newLine();
-
+	rpn.calculate(argv[1]);
+	
     thatIsAllFolks();
     return 0;
 }
@@ -121,23 +46,3 @@ void thatIsAllFolks()
     }
     std::cout << std::endl;
 }
-
-void printTag(const std::string& str) 
-{
-    const int totalWidth = 60;
-    int strLength = str.length();
-    if (strLength >= totalWidth) {
-        std::cout << str << std::endl;
-        return;
-    }
-
-	std::cout << YELLOW << INVERSE << "------------------------------------------------------------" << RESET << std::endl;
-    int hyphensEachSide = (totalWidth - strLength) / 2;
-    int extraHyphen = (totalWidth - strLength) % 2;
-
-    std::string hyphens(hyphensEachSide, '-');
-    std::cout << YELLOW << INVERSE << hyphens << str << hyphens << std::string(extraHyphen, '-') << RESET << std::endl;
-	std::cout << YELLOW << INVERSE << "------------------------------------------------------------" << RESET << std::endl;
-}
-
-
