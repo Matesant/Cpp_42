@@ -18,6 +18,7 @@
 
 # include <algorithm>
 # include <cmath>
+# include <cstdio>
 # include <fstream>
 # include <iostream>
 # include <map>
@@ -38,18 +39,22 @@ class BitcoinExchange
 	std::map<std::string, double> _database;
 
 	void _saveDatabase(void);
-	void _validateLineData(const std::string &line);
-	void _validateLine(const std::string &line);
-	void _writeLine(const std::string &date, double value);
-	// void			validateValue(const std::string &line);
-	// void			validateDate(const std::string &line);
+	bool _validateLineData(const std::string &line);
+	bool _validateLine(const std::string &line);
+	void _writeLineInTerminal(const std::string &date, double value);
+	std::ifstream *_validateFile(const std::string &filename);
+	bool _isValidHeader(const std::string &header);
+	bool _validValue(const std::string &value, std::string &error);
+	bool _validateDataInput(const std::string &date, std::string &error);
+	bool _DateLengthAndHyphensAreValid(const std::string &date, std::string &error);
+	bool _isValidDate(int day, int month, int year, std::string &error);
 
   public:
 	BitcoinExchange(void);
 	~BitcoinExchange(void);
 
 	void _processFile(const std::string &filename);
-	
+
 	class InvalidFile : public std::exception
 	{
 		public:
