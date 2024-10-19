@@ -7,7 +7,6 @@ void    pause(int milliseconds);
 
 int	main(int argc, char **argv)
 {  
-    (void)argv;
     if (argc != 2)
     {
         std::cerr << BROWN << "Usage: ./btc <filename>" << RESET << std::endl;
