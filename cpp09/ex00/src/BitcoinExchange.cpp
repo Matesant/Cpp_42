@@ -36,27 +36,13 @@ double BitcoinExchange::_getClosestExchangeRate(const std::string &date)
     {
         return it->second;
     }
-
     std::map<std::string, double>::iterator lower = _database.lower_bound(date);
     if (lower == _database.begin())
     {
         return lower->second;
     }
-    if (lower == _database.end())
-    {
-        return (--lower)->second;
-    }
-
-    std::map<std::string, double>::iterator prev = lower;
-    --prev;
-    if (std::abs(std::atoi(date.c_str()) - std::atoi(prev->first.c_str())) <= std::abs(std::atoi(lower->first.c_str()) - std::atoi(date.c_str())))
-    {
-        return prev->second;
-    }
-    else
-    {
-        return lower->second;
-    }
+	--lower;
+	return (lower->second);
 }
 
 void BitcoinExchange::_saveDatabase(void)
