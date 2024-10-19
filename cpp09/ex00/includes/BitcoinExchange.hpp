@@ -38,16 +38,25 @@ class BitcoinExchange
 
 	std::map<std::string, double> _database;
 
+	// database csv methods
 	void _saveDatabase(void);
 	bool _validateLineData(const std::string &line);
-	bool _validateLine(const std::string &line);
-	void _writeLineInTerminal(const std::string &date, double value);
-	std::ifstream *_validateFile(const std::string &filename);
-	bool _isValidHeader(const std::string &header);
 	bool _validValue(const std::string &value, std::string &error);
+
+	bool _isValidHeader(const std::string &header);
+	std::ifstream *_validateFile(const std::string &filename);
+	
+	// input validation methods
+	bool _validateLine(const std::string &line);
 	bool _validateDataInput(const std::string &date, std::string &error);
-	bool _DateLengthAndHyphensAreValid(const std::string &date, std::string &error);
+	bool _validValueInput(const std::string &value, std::string &error);
+	bool _DateLengthAndHyphensAreValid(const std::string &date,
+		std::string &error);
 	bool _isValidDate(int day, int month, int year, std::string &error);
+	
+	// exchange rate methods
+	void _writeExchangeInTerminal(const std::string &date, double value);
+	double _getClosestExchangeRate(const std::string &date);
 
   public:
 	BitcoinExchange(void);

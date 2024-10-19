@@ -19,6 +19,45 @@ BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &other)
 BitcoinExchange::~BitcoinExchange()
 {
 }
+void BitcoinExchange::_writeExchangeInTerminal(const std::string &date, double value)
+{
+	double exchangeRate = _getClosestExchangeRate(date);
+	double result = value * exchangeRate;
+	std::cout << YELLOW << date 
+	<< GREY << " | " << PINK << value 
+	<< GREY << " * " << BLUE << exchangeRate 
+	<< GREY << " = " << ORANGE << result << std::endl;
+}
+
+double BitcoinExchange::_getClosestExchangeRate(const std::string &date)
+{
+    std::map<std::string, double>::iterator it = _database.find(date);
+    if (it != _database.end())
+    {
+        return it->second;
+    }
+
+    std::map<std::string, double>::iterator lower = _database.lower_bound(date);
+    if (lower == _database.begin())
+    {
+        return lower->second;
+    }
+    if (lower == _database.end())
+    {
+        return (--lower)->second;
+    }
+
+    std::map<std::string, double>::iterator prev = lower;
+    --prev;
+    if (std::abs(std::atoi(date.c_str()) - std::atoi(prev->first.c_str())) <= std::abs(std::atoi(lower->first.c_str()) - std::atoi(date.c_str())))
+    {
+        return prev->second;
+    }
+    else
+    {
+        return lower->second;
+    }
+}
 
 void BitcoinExchange::_saveDatabase(void)
 {
@@ -64,6 +103,7 @@ void BitcoinExchange::_processFile(const std::string &filename)
 		std::string line;
 		std::getline(*file, line);
 		_isValidHeader(line);
+		std::cout << YELLOW << "date" << GREY << " | " << PINK << "value" << RESET << std::endl;
 		while (std::getline(*file, line))
 		{
 			std::string date;
@@ -75,9 +115,9 @@ void BitcoinExchange::_processFile(const std::string &filename)
 				{
 					if (!_validateLine(line))
 						continue;
-					date = line.substr(0, pos);
-					value = line.substr(pos + 1);
-					_writeLineInTerminal(date, std::atof(value.c_str()));
+					date = line.substr(0, pos - 1);
+					value = line.substr(pos + 2);
+					_writeExchangeInTerminal(date, std::atof(value.c_str()));
 				}
 			}	
 		}
@@ -90,11 +130,6 @@ void BitcoinExchange::_processFile(const std::string &filename)
 	}
 }
 
-void BitcoinExchange::_writeLineInTerminal(const std::string &date, double value)
-{
-	std::cout << date << " " << value << std::endl;
-}
-
 bool BitcoinExchange::_validateLine(const std::string &line)
 {
 	std::string::size_type pos = line.find('|');
@@ -105,7 +140,7 @@ bool BitcoinExchange::_validateLine(const std::string &line)
 	std::string date = line.substr(0, pos - 1);
 	std::string value = line.substr(pos + 2);
 	std::string error;
-	if (!_validateDataInput(date, error) || !_validValue(value, error))
+	if (!_validateDataInput(date, error) || !_validValueInput(value, error))
 	{
 		printColor(error, RED);
 		return false;
@@ -216,6 +251,21 @@ bool BitcoinExchange::_validValue(const std::string &value, std::string &error)
 		error = "Invalid value format: unable to parse value";
 		return false;
 	}
+}
+
+bool BitcoinExchange::_validValueInput(const std::string &value, std::string &error)
+{
+	char* end;
+	double f = std::strtod(value.c_str(), &end);
+	if (*end != '\0') {
+		error = "Invalid value format: unable to parse value";
+		return false;
+	}
+	if (f < 0 || f > 1000) {
+		error = "Invalid value: out of range (0-1000)";
+		return false;
+	}
+	return true;
 }
 
 bool BitcoinExchange::_isValidHeader(const std::string &header)

@@ -13,7 +13,7 @@ DEFAULT_GOAL: all
 
 # Compiler and flags
 CC		=	c++
-CFLAGS	=	 -std=c++98  -g3 -O0 -I./includes
+CFLAGS	=	-Wall -Wextra -Werror -std=c++98 -g3 -O0 -I./includes
 RM		=	rm -rf
 
 # Dir and file names

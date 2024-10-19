@@ -4,14 +4,13 @@
 void    newLine(void);
 void    thatIsAllFolks();
 void    pause(int milliseconds);
-void    printTag(const std::string& str);
 
 int	main(int argc, char **argv)
 {  
     (void)argv;
     if (argc != 2)
     {
-        std::cerr << "Usage: ./bitcoinExchange <filename>" << std::endl;
+        std::cerr << BROWN << "Usage: ./btc <filename>" << RESET << std::endl;
         return 1;
     }
     else
@@ -23,12 +22,12 @@ int	main(int argc, char **argv)
         }
         catch (const std::exception &e)
         {
-            std::cerr << e.what() << std::endl;
+			printColor(e.what(), RED);
             return 1;
         }
     }
 	
-    //thatIsAllFolks();
+    thatIsAllFolks();
     return 0;
 }
 
@@ -57,23 +56,3 @@ void thatIsAllFolks()
     }
     std::cout << std::endl;
 }
-
-void printTag(const std::string& str) 
-{
-    const int totalWidth = 60;
-    int strLength = str.length();
-    if (strLength >= totalWidth) {
-        std::cout << str << std::endl;
-        return;
-    }
-
-	std::cout << YELLOW << INVERSE << "------------------------------------------------------------" << RESET << std::endl;
-    int hyphensEachSide = (totalWidth - strLength) / 2;
-    int extraHyphen = (totalWidth - strLength) % 2;
-
-    std::string hyphens(hyphensEachSide, '-');
-    std::cout << YELLOW << INVERSE << hyphens << str << hyphens << std::string(extraHyphen, '-') << RESET << std::endl;
-	std::cout << YELLOW << INVERSE << "------------------------------------------------------------" << RESET << std::endl;
-}
-
-
