@@ -90,8 +90,7 @@ void PmergeMe::insertPendingElements(std::deque<int> &mainSet, std::deque<int> &
     generateJacobstal(pendingSet.size());
     generateInsertionIndexWithJacobsthal(pendingSet.size());
 
-   
-    for (std::vector<int>::iterator it = _insertion.begin(); it != _insertion.end(); ++it)
+    for (std::vector<int>::iterator it = _insertion.begin(); it != _insertion.end(); it++)
     {
         int value;
         std::deque<int>::iterator position;
@@ -192,7 +191,6 @@ void PmergeMe::generateJacobstal(unsigned long n)
 
 void PmergeMe::generateInsertionIndexWithJacobsthal(unsigned long size)
 {
-    _insertion.clear();
     _insertion.push_back(_jacobsthalNumbers.front());
 
     while (_insertion.size() < size)
@@ -204,31 +202,27 @@ void PmergeMe::generateInsertionIndexWithJacobsthal(unsigned long size)
             int last = _insertion.back();
             int jacob = _jacobsthalNumbers.front();
 
-            _insertion.push_back(jacob--);
+            if (jacob > last && jacob < static_cast<int>(size))
+            {
+                _insertion.push_back(jacob--);
 
-            while (jacob > last && _insertion.size() < size)
-            {  
-                std::vector<int>::iterator it = _insertion.begin();
-                std::vector<int>::iterator ite = _insertion.end();
+                while (jacob > last && _insertion.size() < size)
+                {  
+                    std::vector<int>::iterator it = _insertion.begin();
+                    std::vector<int>::iterator ite = _insertion.end();
 
-                if (std::find(it, ite, jacob) == ite)
-                    _insertion.push_back(jacob);
+                    if (std::find(it, ite, jacob) == ite)
+                        _insertion.push_back(jacob);
 
-                jacob--;
+                    jacob--;
+                }
             }
         }
         else
         {
             int missing = size - 1;
-            while (_insertion.size() < size)
+            while (_insertion.size() < size && missing > 0)
                 _insertion.push_back(missing--);
         }
     }
-    //print insertion green
-
-    for (std::vector<int>::iterator it = _insertion.begin(); it != _insertion.end(); ++it)
-    {
-        printColor(*it, GREEN);
-    }
-    std::cout << std::endl;
 }
