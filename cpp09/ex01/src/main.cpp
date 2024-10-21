@@ -11,7 +11,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		std::cerr << "Usage: ./rpn \"expression\"" << std::endl;
+		std::cerr << RED << "Usage: ./rpn \"expression\"" << RESET << std::endl;
 		return 1;
 	}
 

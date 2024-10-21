@@ -49,11 +49,6 @@ void RPN::calculate(const std::string &expression)
 		else
 			stack.push(std::atof(token.c_str()));
 	}
-	if (stack.size() != 1)
-	{
-		printColor("Invalid expression", RED);
-		return ;
-	}
 	printColor(stack.top(), GREEN);
 }
 

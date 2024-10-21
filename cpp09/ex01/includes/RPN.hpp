@@ -22,6 +22,7 @@
 # include <sstream>
 # include <stack>
 # include <string>
+# include <iostream>
 
 template <typename T> std::string toString(const T &value);
 

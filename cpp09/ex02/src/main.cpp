@@ -9,13 +9,13 @@ int	main(int argc, char **argv)
 {  
     PmergeMe Fjhonson;
 
-	if (argc != 2)
-	{
-		std::cerr << "Usage: ./PmergeMe; \"expression\"" << std::endl;
-		return 1;
-	}
+	if (argc < 2)
+    {
+        std::cout << "Usage: " << argv[0] << " [number1] [number2] ... [numberN]" << std::endl;
+        return 1;
+    }
 
-	Fjhonson.parseGood(argv[1]);
+	Fjhonson.parseGood(argc, argv);
 	
     thatIsAllFolks();
     return 0;

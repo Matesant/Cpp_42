@@ -21,11 +21,12 @@
 # include <algorithm>
 # include <cmath>
 # include <cstdio>
+# include <deque>
 # include <iostream>
+# include <list>
 # include <sstream>
 # include <string>
-# include <deque>
-# include <list>
+# include <vector>
 
 template <typename T> std::string toString(const T &value);
 
@@ -33,24 +34,32 @@ template <typename T> void printColor(const T &value, const std::string &color);
 
 class PmergeMe
 {
-	private:
+  private:
 	PmergeMe(const PmergeMe &other);
 	PmergeMe &operator=(const PmergeMe &other);
 
 	std::list<int> _list;
 	std::deque<int> _deque;
+	std::vector<int> _jacobsthalNumbers;
+	std::vector<int> _insertion;
 
 	// methods
 	bool _validNumber(const std::string &expression);
 	void _divideIntoPairsList(void);
 
-	public:
+  public:
 	PmergeMe(void);
 	~PmergeMe(void);
 	void mergeInsertDeque(std::deque<int> &mainSet);
 	void mergeInsertList(std::list<int> &list);
+	void insertPendingElements(std::deque<int> &mainSet,
+		std::deque<int> &pendingSet);
+	void generateJacobstal(unsigned long n);
+	void generateInsertionIndexWithJacobsthal(unsigned long size);
+	std::deque<int> createMainAndPendingSet(std::deque<int> &mainSet,
+		std::deque<int> &array);
 
-	void parseGood(const std::string &expression);
+	void parseGood(int argc, char **argv);
 };
 
 template <typename T> std::string toString(const T &value)
