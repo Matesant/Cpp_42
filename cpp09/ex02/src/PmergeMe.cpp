@@ -148,21 +148,20 @@ std::list<int> PmergeMe::createMainAndPendingSet(std::list<int> &mainSet, std::l
     {
         std::list<int>::iterator next = it;
         ++next;
-        if (next != array.end()) {
+        if (next != array.end()) 
+        {
             int maxVal = std::max(*it, *next);
             int minVal = std::min(*it, *next);
 
-            // Inserir maxVal de forma ordenada em mainSet
             std::list<int>::iterator mainPos = std::upper_bound(mainSet.begin(), mainSet.end(), maxVal);
             mainSet.insert(mainPos, maxVal);
 
-            // Inserir minVal de forma ordenada em pendingSet
             std::list<int>::iterator pendingPos = std::upper_bound(pendingSet.begin(), pendingSet.end(), minVal);
             pendingSet.insert(pendingPos, minVal);
-
             ++it;
-        } else {
-            // Inserir o último elemento de forma ordenada em mainSet
+        } 
+        else 
+        {
             std::list<int>::iterator mainPos = std::upper_bound(mainSet.begin(), mainSet.end(), *it);
             mainSet.insert(mainPos, *it);
         }
@@ -201,14 +200,11 @@ bool PmergeMe::_validNumber(const std::string &expression)
     std::istringstream iss(expression);
     long long l;
     iss >> std::noskipws >> l;
-    if (iss.eof() && !iss.fail() && l <= MAX_INT && l >= MIN_INT)
+    if (iss.eof() && !iss.fail())
     {
-        return true;
+        return l > 0;
     }
-    else
-    {
-        return false;
-    }
+    return false;
 }
 
 void PmergeMe::generateJacobstal(unsigned long n)
