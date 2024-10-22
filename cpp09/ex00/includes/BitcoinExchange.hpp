@@ -44,7 +44,7 @@ class BitcoinExchange
 	bool _validValue(const std::string &value, std::string &error);
 
 	bool _isValidHeader(const std::string &header);
-	std::ifstream *_validateFile(const std::string &filename);
+	void _validateFile(std::ifstream &file);
 	
 	// input validation methods
 	bool _validateLine(const std::string &line);

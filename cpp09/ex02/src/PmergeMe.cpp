@@ -59,7 +59,6 @@ void PmergeMe::mergeInsertDeque(std::deque<int> &array)
         clock_t start = clock();
         pendingSet = createMainAndPendingSet(mainSet, array);
 
-        std::sort(mainSet.begin(), mainSet.end());
         insertPendingElements(mainSet, pendingSet);
         clock_t end = clock();
         _elapsedDeque = double(end - start) / CLOCKS_PER_SEC;
@@ -81,11 +80,21 @@ std::deque<int> PmergeMe::createMainAndPendingSet(std::deque<int> &mainSet, std:
 
     for (size_t i = 0; i < size; i += 2) 
     {
-        if (i + 1 < size) {
-            mainSet.push_back(std::max(array[i], array[i + 1]));
-            pendingSet.push_back(std::min(array[i], array[i + 1]));
-        } else {
-            mainSet.push_back(array[i]);
+        if (i + 1 < size) 
+        {
+            int maxVal = std::max(array[i], array[i + 1]);
+            int minVal = std::min(array[i], array[i + 1]);
+
+            std::deque<int>::iterator mainPos = std::upper_bound(mainSet.begin(), mainSet.end(), maxVal);
+            mainSet.insert(mainPos, maxVal);
+
+            std::deque<int>::iterator pendingPos = std::upper_bound(pendingSet.begin(), pendingSet.end(), minVal);
+            pendingSet.insert(pendingPos, minVal);
+        } 
+        else 
+        {
+            std::deque<int>::iterator mainPos = std::upper_bound(mainSet.begin(), mainSet.end(), array[i]);
+            mainSet.insert(mainPos, array[i]);
         }
     }
 
@@ -114,7 +123,6 @@ void PmergeMe::mergeInsertList(std::list<int> &array)
     clock_t start = clock();
     pendingSet = createMainAndPendingSet(mainSet, array);
 
-    mainSet.sort();
     insertPendingElements(mainSet, pendingSet);
     array = mainSet;
     clock_t end = clock();
@@ -141,11 +149,22 @@ std::list<int> PmergeMe::createMainAndPendingSet(std::list<int> &mainSet, std::l
         std::list<int>::iterator next = it;
         ++next;
         if (next != array.end()) {
-            mainSet.push_back(std::max(*it, *next));
-            pendingSet.push_back(std::min(*it, *next));
+            int maxVal = std::max(*it, *next);
+            int minVal = std::min(*it, *next);
+
+            // Inserir maxVal de forma ordenada em mainSet
+            std::list<int>::iterator mainPos = std::upper_bound(mainSet.begin(), mainSet.end(), maxVal);
+            mainSet.insert(mainPos, maxVal);
+
+            // Inserir minVal de forma ordenada em pendingSet
+            std::list<int>::iterator pendingPos = std::upper_bound(pendingSet.begin(), pendingSet.end(), minVal);
+            pendingSet.insert(pendingPos, minVal);
+
             ++it;
         } else {
-            mainSet.push_back(*it);
+            // Inserir o último elemento de forma ordenada em mainSet
+            std::list<int>::iterator mainPos = std::upper_bound(mainSet.begin(), mainSet.end(), *it);
+            mainSet.insert(mainPos, *it);
         }
         ++it;
     }

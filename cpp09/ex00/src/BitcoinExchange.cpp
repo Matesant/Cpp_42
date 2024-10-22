@@ -47,72 +47,57 @@ double BitcoinExchange::_getClosestExchangeRate(const std::string &date)
 
 void BitcoinExchange::_saveDatabase(void)
 {
-	std::ifstream *file = _validateFile("data.csv");
+    std::ifstream file("data.csv");
+	_validateFile(file);
 
-	if (file->is_open())
+    
+	std::string line;
+	std::getline(file, line);
+	_isValidHeader(line);
+	while (std::getline(file, line))
 	{
-		std::string line;
-		std::getline(*file, line);
-		_isValidHeader(line);
-		while (std::getline(*file, line))
+		std::string date;
+		std::string value;
+		std::string::size_type pos = line.find(',');
+		if (pos != std::string::npos)
 		{
-			std::string date;
-			std::string value;
-			std::string::size_type pos = line.find(',');
-			if (pos != std::string::npos)
+			if (pos + 1 < line.size())
 			{
-				if (pos + 1 < line.size())
-				{
-					if (!_validateLineData(line))
-						continue;
-					date = line.substr(0, pos);
-					value = line.substr(pos + 1);
-					_database[date] = std::atof(value.c_str());
-				}
+				if (!_validateLineData(line))
+					continue;
+				date = line.substr(0, pos);
+				value = line.substr(pos + 1);
+				_database[date] = std::atof(value.c_str());
 			}
 		}
-		delete file;
-	}
-	else
-	{
-		printColor("Invalid file", RED);
-		return ;
 	}
 }
 
 void BitcoinExchange::_processFile(const std::string &filename)
 {
-	std::ifstream *file = _validateFile(filename);
+    std::ifstream file(filename.c_str());
+	_validateFile(file);
 
-	if (file->is_open())
+	std::string line;
+	std::getline(file, line);
+	_isValidHeader(line);
+	std::cout << YELLOW << "date" << GREY << " | " << PINK << "value" << RESET << std::endl;
+	while (std::getline(file, line))
 	{
-		std::string line;
-		std::getline(*file, line);
-		_isValidHeader(line);
-		std::cout << YELLOW << "date" << GREY << " | " << PINK << "value" << RESET << std::endl;
-		while (std::getline(*file, line))
+		std::string date;
+		std::string value;
+		std::string::size_type pos = line.find('|');
+		if (pos != std::string::npos)
 		{
-			std::string date;
-			std::string value;
-			std::string::size_type pos = line.find('|');
-			if (pos != std::string::npos)
+			if (pos + 1 < line.size())
 			{
-				if (pos + 1 < line.size())
-				{
-					if (!_validateLine(line))
-						continue;
-					date = line.substr(0, pos - 1);
-					value = line.substr(pos + 2);
-					_writeExchangeInTerminal(date, std::atof(value.c_str()));
-				}
-			}	
-		}
-		delete file;
-	}
-	else
-	{
-		printColor("Invalid file", RED);
-		return ;
+				if (!_validateLine(line))
+					continue;
+				date = line.substr(0, pos - 1);
+				value = line.substr(pos + 2);
+				_writeExchangeInTerminal(date, std::atof(value.c_str()));
+			}
+		}	
 	}
 }
 
@@ -134,17 +119,12 @@ bool BitcoinExchange::_validateLine(const std::string &line)
 	return true;
 }
 
-std::ifstream* BitcoinExchange::_validateFile(const std::string &filename)
+void BitcoinExchange::_validateFile(std::ifstream &file)
 {
-	std::ifstream *file = new std::ifstream (filename.c_str());
-	if (file->is_open())
-	{
-		return (file);
-	}
+	if (file.is_open())
+		return ;
 	else
-	{
 		throw InvalidFile();
-	}
 }
 
 bool BitcoinExchange::_validateLineData(const std::string &line)
@@ -158,6 +138,11 @@ bool BitcoinExchange::_validateLineData(const std::string &line)
 	}
 	std::string date = line.substr(0, pos);
 	std::string value = line.substr(pos + 1);
+	if (std::isspace(date[0]) || std::isspace(value[0]))
+	{
+		throw InvalidFile();
+		return false;
+	}
 	if (!_validateDataInput(date, error) || !_validValue(value, error))
 	{
 		printColor(error, RED);

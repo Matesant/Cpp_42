@@ -47,7 +47,15 @@ void RPN::calculate(const std::string &expression)
 			stack.push(result);
 		}
 		else
-			stack.push(std::atof(token.c_str()));
+		{
+            double number = std::atof(token.c_str());
+            if (number > 9)
+            {
+                printColor("Number greater than 9 found. Exiting.", RED);
+                return;
+            }
+            stack.push(number);
+        }
 	}
 	printColor(stack.top(), GREEN);
 }
