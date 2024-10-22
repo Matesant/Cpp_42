@@ -27,6 +27,8 @@
 # include <sstream>
 # include <string>
 # include <vector>
+# include <ctime>
+# include <iomanip>
 
 template <typename T> std::string toString(const T &value);
 
@@ -42,6 +44,8 @@ class PmergeMe
 	std::deque<int> _deque;
 	std::vector<int> _jacobsthalNumbers;
 	std::vector<int> _insertion;
+	double _elapsedDeque;
+	double _elapsedList;
 
 	// methods
 	bool _validNumber(const std::string &expression);
@@ -58,6 +62,12 @@ class PmergeMe
 	void generateInsertionIndexWithJacobsthal(unsigned long size);
 	std::deque<int> createMainAndPendingSet(std::deque<int> &mainSet,
 		std::deque<int> &array);
+	std::list<int> createMainAndPendingSet(std::list<int> &mainSet,
+		std::list<int> &array);
+	void insertPendingElements(std::list<int> &mainSet,
+		std::list<int> &pendingSet);
+	std::list<int>::iterator advanceIterator(std::list<int>::iterator it,
+		size_t n);
 
 	void parseGood(int argc, char **argv);
 };

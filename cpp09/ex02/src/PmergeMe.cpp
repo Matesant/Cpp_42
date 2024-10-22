@@ -46,22 +46,29 @@ void PmergeMe::parseGood(int argc, char **argv)
     mergeInsertDeque(deque);
     mergeInsertList(list);
 
-    std::cout << GREY << "After: ";
-    for (std::deque<int>::iterator it = deque.begin(); it != deque.end(); ++it)
-    {
-        printColor(*it, GREY);
-    }
     std::cout << std::endl;
+    std::cout << std::fixed << std::setprecision(5);
+    std::cout << GREY << "Elapsed time for deque: " << _elapsedDeque << "s" << std::endl;
+    std::cout << YELLOW << "Elapsed time for list: " << _elapsedList << "s" << RESET << std::endl;
 }
 
 void PmergeMe::mergeInsertDeque(std::deque<int> &array)
 {
         std::deque<int> mainSet, pendingSet;
+
+        clock_t start = clock();
         pendingSet = createMainAndPendingSet(mainSet, array);
 
         std::sort(mainSet.begin(), mainSet.end());
         insertPendingElements(mainSet, pendingSet);
-        array = mainSet;
+        clock_t end = clock();
+        _elapsedDeque = double(end - start) / CLOCKS_PER_SEC;
+        std::cout << GREY << "After:  ";
+        for (std::deque<int>::iterator it = mainSet.begin(); it != mainSet.end(); ++it)
+        {
+            printColor(*it, GREY);
+        }
+        std::cout << std::endl;
 }
 
 std::deque<int> PmergeMe::createMainAndPendingSet(std::deque<int> &mainSet, std::deque<int> &array)
@@ -100,62 +107,74 @@ void PmergeMe::insertPendingElements(std::deque<int> &mainSet, std::deque<int> &
         mainSet.insert(position, value);
     }
 }
-
-void PmergeMe::mergeInsertList(std::list<int> &list)
+void PmergeMe::mergeInsertList(std::list<int> &array)
 {
-    size_t size = list.size();
+    std::list<int> mainSet, pendingSet;
+
+    clock_t start = clock();
+    pendingSet = createMainAndPendingSet(mainSet, array);
+
+    mainSet.sort();
+    insertPendingElements(mainSet, pendingSet);
+    array = mainSet;
+    clock_t end = clock();
+    _elapsedList = double(end - start) / CLOCKS_PER_SEC;
+    std::cout << YELLOW << "After:  ";
+    for (std::list<int>::iterator it = array.begin(); it != array.end(); ++it)
+    {
+        printColor(*it, YELLOW);
+    }
+    std::cout << std::endl;
+}
+
+std::list<int> PmergeMe::createMainAndPendingSet(std::list<int> &mainSet, std::list<int> &array)
+{
+    size_t size = array.size();
+    std::list<int> pendingSet;
+
     if (size <= 1)
-        return;
+        return pendingSet;
 
-    std::list<int> mainSet, pendingNumberSet;
-    std::list<int>::iterator it = list.begin();
-    for (size_t i = 0; i < size; i += 2)
+    std::list<int>::iterator it = array.begin();
+    for (size_t i = 0; i < size; i += 2) 
     {
-        if (i + 1 < size)
-        {
-            int first = *it++;
-            int second = *it++;
-            mainSet.push_back(std::max(first, second));
-            pendingNumberSet.push_back(std::min(first, second));
+        std::list<int>::iterator next = it;
+        ++next;
+        if (next != array.end()) {
+            mainSet.push_back(std::max(*it, *next));
+            pendingSet.push_back(std::min(*it, *next));
+            ++it;
+        } else {
+            mainSet.push_back(*it);
         }
-        else
-        {
-            mainSet.push_back(*it++);
+        ++it;
+    }
+
+    return pendingSet;
+}
+
+void PmergeMe::insertPendingElements(std::list<int> &mainSet, std::list<int> &pendingSet)
+{
+    std::vector<int>::iterator it;
+    for (it = _insertion.begin(); it != _insertion.end(); ++it)
+    {
+        int value;
+        std::list<int>::iterator position;
+
+        if (static_cast<std::list<int>::size_type>(*it) < pendingSet.size()) {
+            value = *advanceIterator(pendingSet.begin(), *it);
+            position = std::upper_bound(mainSet.begin(), mainSet.end(), value);
+            mainSet.insert(position, value);
         }
     }
-    mergeInsertList(mainSet);
+}
 
-    int firstLargerElement = mainSet.front();
-    int smallerElement = -1;
-
-    it = list.begin();
-    for (size_t i = 0; i < size; i += 2)
-    {
-        if (i + 1 < size)
-        {
-            int first = *it++;
-            int second = *it++;
-            if (first == firstLargerElement || second == firstLargerElement)
-            {
-                smallerElement = std::min(first, second);
-                break;
-            }
-        }
+std::list<int>::iterator PmergeMe::advanceIterator(std::list<int>::iterator it, size_t n)
+{
+    while (n-- > 0) {
+        ++it;
     }
-    list.clear();
-    list = mainSet;
-
-    if (smallerElement != -1 && std::find(list.begin(), list.end(), smallerElement) == list.end())
-        list.push_front(smallerElement);
-
-    for (std::list<int>::iterator it = pendingNumberSet.begin(); it != pendingNumberSet.end(); ++it)
-    {
-        if (*it != smallerElement || list.size() == (size - 1))
-        {
-            std::list<int>::iterator pos = std::lower_bound(list.begin(), list.end(), *it);
-            list.insert(pos, *it);
-        }
-    }
+    return it;
 }
 
 bool PmergeMe::_validNumber(const std::string &expression)
